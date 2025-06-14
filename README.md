@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Fento2.png" alt="Logo" width="350" />
+  <img src="imágenes/Fento2.png" alt="Logo" width="350" />
 </div>
 
 <br>
