@@ -36,7 +36,16 @@ Las ecuaciones en 1D que se admiten tienen la forma siguiente:
 
 donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente. 
 
-Para hacer uso del programa que permite resolver la ecuación anterior se debe crear un fichero de texto de nombre configuracion.txt que contenga las especificaciones del problema que se pretende resolver. En primer lugar, se proporcionan expresiones para α, β  y *f* con lenguaje matemático de python, pueden escogerse funciones de *x* o constantes.
+Para hacer uso del programa que permite resolver la ecuación anterior se debe crear un fichero de texto de nombre configuracion.txt que contenga las especificaciones del problema que se pretende resolver. En primer lugar, se proporcionan expresiones para α, β  y *f* con lenguaje matemático de python, pueden escogerse funciones de x o constantes. Se presenta a continuación un ejemplo:
+
+```
+alpha = x**3+x
+
+beta = 5*x
+
+f = -89*x**3-95*x**5+18*x**2+38*x-9
+```
+
 
 Como condiciones de contorno se pueden usar tanto de Dirichlet como de Robin o de Neumann. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
 
