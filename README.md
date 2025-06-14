@@ -19,6 +19,6 @@ pero es recomendable crear y activar previamente un entorno virtual:
 ```bash
 python3− m venv env
 source env/bin/activate
-``
+```
 
 donde env es el nombre del entorno.
