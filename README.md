@@ -44,7 +44,7 @@ Como condiciones de contorno se pueden usar tanto de Dirichlet como de Robin o d
   <img src="imágenes/dirichlet1d.jpeg" width="80" />
 </div>
 
-Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa y el valor específico de *p* que se quiere usar:
+Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa y el valor específico de *p* que se quiere:
 
 ```
 tipo_condicion_0 = Dirichlet
