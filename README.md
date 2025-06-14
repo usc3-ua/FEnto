@@ -24,7 +24,7 @@ source env/bin/activate
 
 donde env es el nombre del entorno.
 
-# Contenido
+# Contenido y uso
 
 Este paquete permite resolver ecuaciones tanto unidimensionales como bidimensionales usando el método de elementos finitos.
 
@@ -34,18 +34,31 @@ Las ecuaciones en 1D que se admiten tienen la forma siguiente:
   <img src="imágenes/ecuacion1d.jpeg" width="270" />
 </div>
 
-donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente.
+donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente. 
+
+Para hacer uso del programa que permite resolver la ecuación anterior se debe crear un fichero de texto de nombre configuracion.txt que contenga las especificaciones del problema que se pretende resolver. En primer lugar, se proporcionan expresiones para α, β  y *f* con lenguaje matemático de python, pueden escogerse funciones de *x* o constantes.
+
+Como condiciones de contorno se pueden usar tanto de Dirichlet como de Robin o de Neumann. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
 
 <div align="center">
   <img src="imágenes/dirichlet1d.jpeg" width="80" />
 </div>
+
+Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa y el valor específico de *p* que se quiere usar:
+
+```
+tipo_condicion_0 = Dirichlet
+
+valor_dirichlet_0 = 10
+```
+
 
 <div align="center">
   <img src="imágenes/robin1d.jpeg" width="150" />
 </div>
 
 
-pueden especificarse como funciones de *x* o constantes.
+
 
 
 
