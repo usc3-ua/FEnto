@@ -23,3 +23,21 @@ source env/bin/activate
 ```
 
 donde env es el nombre del entorno.
+
+# Contenido
+
+Este paquete permite resolver ecuaciones tanto unidimensionales como bidimensionales usando el método de elementos finitos.
+
+Las ecuaciones en 1D que se admiten tienen la forma siguiente:
+
+donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente.
+
+
+
+
+pueden especificarse como funciones de *x* o constantes.
+
+
+
+
+
