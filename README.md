@@ -13,8 +13,9 @@ Es suficiente con ejecutar en consola el comando siguiente:
 ```bash
 python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
+donde 'python' es un alias para python3.
 
-pero es recomendable crear y activar previamente un entorno virtual:
+Sin embargo, es recomendable crear y activar previamente un entorno virtual:
 
 ```bash
 python3− m venv env
