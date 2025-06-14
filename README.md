@@ -8,4 +8,10 @@ Paquete que permite resolver ecuaciones en derivadas parciales usando el método
 
 # Instalación
 
-Es suficiente con ejecutar en consola el comando 'python -m pip install git+https://github.com/usc3-ua/FEnto.git', pero es recomendable crear y activar antes un entorno virtual.
+Es suficiente con ejecutar en consola el comando siguiente:
+
+```bash
+python -m pip install git+https://github.com/usc3-ua/FEnto.git
+```
+
+pero es recomendable crear y activar previamente un entorno virtual.
