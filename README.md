@@ -97,6 +97,7 @@ q_robin_L = 43
 
 Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especficarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con especificar γ=0 en las condiciones de Robin.
 
+En el fichero configuracion.txt pueden no especificarse todas las variables y se usarán los valores por defecto que aparecen en el programa principal. Si no existiese ningún fichero de configuración simplemente se ejecutaría el programa usando todas las variables que aparecen por defecto.
 
 
 
