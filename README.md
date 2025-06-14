@@ -68,7 +68,7 @@ gamma_robin_L = -1
 q_robin_L = 43
 ```
 
-Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L. Para poder aplicar condiciones de Neumann basta con especificar γ=0 en las condiciones de Robin.
+Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especficarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con especificar γ=0 en las condiciones de Robin.
 
 
 
