@@ -52,10 +52,23 @@ tipo_condicion_0 = Dirichlet
 valor_dirichlet_0 = 10
 ```
 
+Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguiente:
 
 <div align="center">
   <img src="imágenes/robin1d.jpeg" width="150" />
 </div>
+
+entonces habrá que especificar el tipo de condición, el valor de γ y el valor de *q*:
+
+```
+tipo_condicion_L = RoBin
+
+gamma_robin_L = -1
+
+q_robin_L = 43
+``
+
+Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L. Para poder aplicar condiciones de Neumann basta con especificar γ=0 en las condiciones de Robin.
 
 
 
