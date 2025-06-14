@@ -31,13 +31,13 @@ Este paquete permite resolver ecuaciones tanto unidimensionales como bidimension
 Las ecuaciones en 1D que se admiten tienen la forma siguiente:
 
 <div align="center">
-  <img src="imágenes/ecuacion1d.jpeg" width="150" />
+  <img src="imágenes/ecuacion1d.jpeg" width="250" />
 </div>
 
 donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente.
 
 <div align="center">
-  <img src="imágenes/dirichlet1d.jpeg" width="150" />
+  <img src="imágenes/dirichlet1d.jpeg" width="100" />
 </div>
 
 <div align="center">
