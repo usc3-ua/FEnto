@@ -60,7 +60,7 @@ Se podrán aplicar condiciones de contorno tanto de Dirichlet como de Robin o de
   <img src="imágenes/dirichlet1d.jpeg" width="80" />
 </div>
 
-Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor específico de *p* que se quiere en `valor_dirichlet_0`.
+Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor numérico específico de *p* que se quiere en `valor_dirichlet_0`.
 
 ```
 tipo_condicion_0 = dirichlet
@@ -74,7 +74,7 @@ Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguien
   <img src="imágenes/robin1d.jpeg" width="150" />
 </div>
 
-entonces habrá que especificar el tipo de condición en `tipo_condicion_L`, el valor de γ en `gamma_robin_L` y el valor de *q* en `q_robin_L`:
+entonces habrá que especificar el tipo de condición en `tipo_condicion_L` y los valores numéricos de γ en `gamma_robin_L` y de *q* en `q_robin_L`:
 
 ```
 tipo_condicion_L = robin
@@ -97,7 +97,7 @@ se supondrá que ha sido un despiste y dará un error para que el usuario rellen
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver.jpeg" width="350" />
+  <img src="imágenes/ecaresolver.jpeg" width="370" />
 </div>
 
 con condiciones de contorno de Robin en x=0:
