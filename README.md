@@ -4,7 +4,7 @@
 
 <br>
 
-Paquete que permite resolver ecuaciones en derivadas parciales usando el método de elementos finitos.
+Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales y bidimensionales usando el método de elementos finitos.
 
 # Instalación
 
@@ -17,43 +17,33 @@ python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
 donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env'. Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema.
 
-# Contenido y uso
+# Programa 1D
 
-Este paquete permite resolver ecuaciones tanto unidimensionales como bidimensionales usando el método de elementos finitos. 
-
-Las ecuaciones en 1D que se admiten tienen la forma siguiente:
+El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones diferenciales unidimensionales con la forma siguiente:
 
 <div align="center">
   <img src="imágenes/ecuacion1d.jpeg" width="270" />
 </div>
 
-donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente. 
+utilizando el método de elementos finitos. Para poder utilizarlo, es necesario crear un archivo de configuración denominado `configuracion.txt` que contenga las especificaciones concretas del problema que se pretenda resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables.
 
-El programa denominado `elementos_finitos_1d.py` permite resolver la ecuación anterior. Si se ejecuta tal y como está se resolverá la siguiente ecuación diferencial:
-
-Para hacer uso del programa que permite resolver la ecuación anterior se debe crear un fichero de texto de nombre configuracion.txt que contenga las especificaciones del problema que se pretende resolver. 
-
-En primer lugar, se debe proporcionar el extremo superior del dominio en el que se va a resolver la ecuación diferencial anterior, además del número de nodos que se quieren usar para su resolución:
+En primer lugar es necesario definir el límite superior del dominio L, denotado como xmax, que debe ser un número positivo. Además, se especifica el número de nodos (n_nodos) que se van a utilizar para la resolución, que debe ser un valor entero y mayor que dos. Esto se debe a que los elementos que se usan en el programa son elementos lineales y, en consecuencia, si se tienen n_nodos se tendrán (n_nodos-1) elementos (y el menor número de elementos que se puede tener para resolver un problema es uno).
 
 ```
 xmax = 1
 
-n_nodos = 101
+n_nodos = 21
 ```
 
-A continuación, se escoge el modo en el que se va a repartir el tamaño de los elementos (denominado 'tamano_longitudes'): uniforme o personalizado. Si se escoge uniforme el programa va automáticamente a dividir el dominio de forma que se generen elementos de igual tamaño. Si se escoge personalizado, habrá que especificar también una variable denominada 'longitudes_elementos' donde aparecerán las longitudes de cada uno de los elementos. Si la suma de todas las longitudes no es igual a 'xmax' el programa dará error y pedirá que se vuelva a crear este vector. Un ejemplo que no da error es el siguiente:
+Una vez hecho esto, hay que indicar cómo se quiere que sea el tamaño de los elementos. Para eso se usa la variable `tamano_longitudes`, que tiene dos valores posibles: `uniforme` o `personalizado`. Si se escoge `uniforme` el programa va a dividir el dominio de forma que se generen elementos de igual tamaño. Si se escoge `personalizado` será obligatorio definir otra variable de nombre `longitudes_elementos` en la cual se especificarán las longitudes de cada uno de los elementos como números positivos separados por comas. No será necesario especificar `longitudes_elementos` en el caso de escoger `tamano_longitudes = uniforme`. Para el caso personalizado se podría tener lo siguiente:
 
 ```
-tamano_longitudes = Personalizado
+tamano_longitudes = personalizado
 
-longitudes_elementos = 0.01,0.005,0.01,0.01,0.01,0.01,0.01,0.01,0.005,0.01,0.01,0.01,0.01,0.01,0.01,0.005,0.01,
-0.01,0.01,0.01,0.005,0.007,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,
-0.01,0.01,0.01,0.01,0.005,0.01,0.01,0.01,0.01,0.008,0.01,0.002,0.01,0.01,0.003,0.01,0.01,0.01,0.01,0.003,0.01,
-0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.007,0.01,0.01,0.01,0.01,0.01,0.01,0.01,
-0.005,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.070
+longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.05,0.06,0.04,0.07,0.03,0.08,0.02,0.05,0.05
 ```
 
-Una vez hecho lo anterior, se proporcionan expresiones para α, β y *f* con lenguaje matemático de python, pueden escogerse funciones de x o constantes. Se presenta a continuación un ejemplo:
+A continuación, se definen α, β y *f* como funciones de x o valores constantes con lenguaje matemático de python.
 
 ```
 alpha = x**3+x
@@ -63,14 +53,13 @@ beta = 5*x
 f = -89*x**3-95*x**5+18*x**2+38*x-9
 ```
 
-
-Como condiciones de contorno se pueden usar tanto de Dirichlet como de Robin o de Neumann. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
+Se podrán aplicar condiciones de contorno tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
 
 <div align="center">
   <img src="imágenes/dirichlet1d.jpeg" width="80" />
 </div>
 
-Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa y el valor específico de *p* que se quiere:
+Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor específico de *p* que se quiere en `valor_dirichlet_0`.
 
 ```
 tipo_condicion_0 = Dirichlet
@@ -84,19 +73,19 @@ Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguien
   <img src="imágenes/robin1d.jpeg" width="150" />
 </div>
 
-entonces habrá que especificar el tipo de condición, el valor de γ y el valor de *q*:
+entonces habrá que especificar el tipo de condición en `tipo_condicion_L`, el valor de γ en `gamma_robin_L` y el valor de *q* en `q_robin_L`:
 
 ```
-tipo_condicion_L = RoBin
+tipo_condicion_L = robin
 
 gamma_robin_L = -1
 
 q_robin_L = 43
 ```
 
-Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especficarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con especificar γ=0 en las condiciones de Robin.
+Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especficarlo de la misma forma que se ha mostrado pero intercambiando L por 0 y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con escoger γ=0 en las condiciones de Robin.
 
-En el fichero configuracion.txt pueden no especificarse todas las variables y se usarán los valores por defecto que aparecen en el programa principal. Si no existiese ningún fichero de configuración simplemente se ejecutaría el programa usando todas las variables que aparecen por defecto.
+
 
 
 
