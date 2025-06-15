@@ -8,27 +8,18 @@ Paquete que permite resolver ecuaciones en derivadas parciales usando el método
 
 # Instalación
 
-Es suficiente con ejecutar en consola el comando siguiente:
-
-```bash
-python -m pip install git+https://github.com/usc3-ua/FEnto.git
-```
-donde 'python' es un alias para python3.
-
-Sin embargo, es recomendable crear y activar previamente un entorno virtual:
+Es suficiente con ejecutar en consola lo siguiente:
 
 ```bash
 python3− m venv env
 source env/bin/activate
+python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
-
-donde env es el nombre del entorno.
+donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env'. Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema.
 
 # Contenido y uso
 
 Este paquete permite resolver ecuaciones tanto unidimensionales como bidimensionales usando el método de elementos finitos. 
-
-
 
 Las ecuaciones en 1D que se admiten tienen la forma siguiente:
 
@@ -38,7 +29,11 @@ Las ecuaciones en 1D que se admiten tienen la forma siguiente:
 
 donde φ es la función desconocida, α y β son parámetros conocidos o funciones asociadas con las propiedades físicas del dominio de la solución, y *f* es la función de excitación o fuente. 
 
-Para hacer uso del programa que permite resolver la ecuación anterior se debe crear un fichero de texto de nombre configuracion.txt que contenga las especificaciones del problema que se pretende resolver. En primer lugar, se debe proporcionar el extremo superior del dominio en el que se va a resolver la ecuación diferencial anterior, además del número de nodos que se quieren usar para su resolución:
+El programa denominado `elementos_finitos_1d.py` permite resolver la ecuación anterior. Si se ejecuta tal y como está se resolverá la siguiente ecuación diferencial:
+
+Para hacer uso del programa que permite resolver la ecuación anterior se debe crear un fichero de texto de nombre configuracion.txt que contenga las especificaciones del problema que se pretende resolver. 
+
+En primer lugar, se debe proporcionar el extremo superior del dominio en el que se va a resolver la ecuación diferencial anterior, además del número de nodos que se quieren usar para su resolución:
 
 ```
 xmax = 1
