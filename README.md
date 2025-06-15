@@ -40,7 +40,8 @@ Una vez hecho esto, hay que indicar cómo se quiere que sea el tamaño de los el
 ```
 tamano_longitudes = personalizado
 
-longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.05,0.06,0.04,0.07,0.03,0.08,0.02,0.05,0.05
+longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.05,0.06,0.04,0.07,0.03,0.08,0.02,
+0.05,0.05
 ```
 
 A continuación, se definen α, β y *f* como funciones de x o valores constantes con lenguaje matemático de python.
