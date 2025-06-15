@@ -63,7 +63,7 @@ Se podrán aplicar condiciones de contorno tanto de Dirichlet como de Robin o de
 Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor específico de *p* que se quiere en `valor_dirichlet_0`.
 
 ```
-tipo_condicion_0 = Dirichlet
+tipo_condicion_0 = dirichlet
 
 valor_dirichlet_0 = 10
 ```
