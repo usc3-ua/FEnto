@@ -97,7 +97,7 @@ se supondrá que ha sido un despiste y dará un error para que el usuario rellen
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver.jpeg" width="250" />
+  <img src="imágenes/ecaresolver.jpeg" width="350" />
 </div>
 
 con condiciones de contorno de Robin en x=0:
@@ -109,7 +109,7 @@ con condiciones de contorno de Robin en x=0:
 y condiciones de contorno de Dirichlet en x=L:
 
 <div align="center">
-  <img src="imágenes/dirichletL.jpeg" width="130" />
+  <img src="imágenes/dirichletL.jpeg" width="100" />
 </div>
 
 con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
