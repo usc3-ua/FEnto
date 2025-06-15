@@ -86,6 +86,36 @@ q_robin_L = 43
 
 Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especficarlo de la misma forma que se ha mostrado pero intercambiando L por 0 y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con escoger γ=0 en las condiciones de Robin.
 
+No es necesario especificar en el fichero `configuracion.txt` los valores de todas las variables. Si alguna variable no aparece, se usará el valor por defecto. Sin embargo, si aparece el nombre de una variable pero no su valor, por ejemplo:
+
+```
+xmax =
+```
+
+se supondrá que ha sido un despiste y dará un error para que el usuario rellene el valor de la variable correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración.
+
+En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
+
+<div align="center">
+  <img src="imágenes/ecaresolver.jpeg" width="150" />
+</div>
+
+con condiciones de contorno de Robin en x=0:
+
+<div align="center">
+  <img src="imágenes/robin0.jpeg" width="150" />
+</div>
+
+y condiciones de contorno de Dirichlet en x=L:
+
+<div align="center">
+  <img src="imágenes/dirichletL.jpeg" width="150" />
+</div>
+
+con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
+
+
+
 
 
 
