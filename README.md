@@ -91,7 +91,7 @@ No es necesario especificar en el fichero `configuracion.txt` los valores de tod
 ```
 xmax =
 ```
-se supondrá que ha sido un despiste y dará un error para que el usuario rellene el valor de la variable correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración. Además, si se usasen comillas para definir el nombre o el valor de alguno de los parámetros el programa seguiría funcionando, pues las elimina de todas las líneas "válidas" (líneas que no son comentarios) y simplemente coje el valor que hay entre las mismas y comprueba si es válido.
+se supondrá que ha sido un despiste y dará un error para que el usuario rellene con el valor correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración. Además, si se usasen comillas para definir el nombre o el valor de alguno de los parámetros el programa seguiría funcionando, pues las elimina de todas las líneas "válidas" (líneas que no son comentarios) y simplemente coje el valor que hay entre las mismas y comprueba si es válido.
 
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
