@@ -61,7 +61,7 @@ A continuación, se definen α, β y *f* como valores constantes o funciones de 
 
 - Otras funciones:  `sqrt` (raíz), `abs` (valor absoluto).
 
-También se puede usar la constante matematica π con `pi`.
+También se puede usar la constante matematica π con `pi`. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_1d.py`.
 
 ```
 alpha = x**3+x
