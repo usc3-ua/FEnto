@@ -21,7 +21,7 @@ Una vez instalado, hay que moverse a la carpeta del paquete para poder hacer uso
 
 ```bash
 cd env/lib/python3.13/site-packages/FEnto
-``
+```
 
 
 # Programa 1D
