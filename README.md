@@ -54,7 +54,7 @@ beta = 5*x
 f = -89*x**3-95*x**5+18*x**2+38*x-9
 ```
 
-Se podrán aplicar condiciones de contorno tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
+El último paso de la creación del archivo `configuracion.txt` es aplicar condiciones de contorno, que pueden ser tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
 
 <div align="center">
   <img src="imágenes/dirichlet1d.jpeg" width="80" />
