@@ -17,6 +17,13 @@ python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
 donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env'. Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema.
 
+Una vez instalado, hay que moverse a la carpeta del paquete para poder hacer uso de sus programas:
+
+```bash
+cd env/lib/python3.13/site-packages/FEnto
+``
+
+
 # Programa 1D
 
 El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones diferenciales unidimensionales con la forma siguiente:
