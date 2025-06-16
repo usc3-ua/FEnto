@@ -14,6 +14,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
+dependencies = ["numpy"]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 keywords = ["elementos finitos", "FEM", "MEF", "ecuaciones diferenciales", "EDs", "EDPs"]
