@@ -96,7 +96,7 @@ Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condicione
 No es necesario especificar en el fichero `configuracion1d.txt` los valores de todas las variables, pero sí es importante que se pongan en el orden que se ha indicado. Si alguna variable no aparece, se usará el valor por defecto. Sin embargo, si aparece el nombre de una variable pero no su valor, por ejemplo:
 
 ```
-xmax =
+L =
 ```
 se supondrá que ha sido un despiste y dará un error para que el usuario rellene con el valor correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración. Parece importante recalcar que a pesar de que no hay variables obligatorias en un principio, sí que hay variables que deben ponerse por pares o tríos. Si se escoge `tamano_longitudes = personalizado` debe aparecer también `longitudes_elementos`, y lo mismo pasa con `tipo_condicion_0 = dirichlet` (o `tipo_condicion_L = dirichlet`) y `valor_dirichlet_0` (o `valor_dirichlet_L`). Si se escogen condiciones de Robin en alguno de los dos extremos del dominio `tipo_condicion_0 = robin` (o `tipo_condicion_L = robin`) tendrán que aparecer también las variables `gamma_robin_0` y `q_robin_0` (o `gamma_robin_L` y `q_robin_L`). 
 
