@@ -66,7 +66,10 @@ def leer_configuracion(archivo, defecto):
 
             if clave == "L":
                 try:
-                    valor_float = float(valor)
+                    safe_env_2 = {"pi": np.pi, "e": np.e}
+                    valor_float = eval(valor, {"__builtins__": None}, safe_env_2)
+                    if not isinstance(valor_float, (int, float)):
+                        raise ValueError
                     if valor_float <= 0:
                         raise ValueError
                     config_leida[clave] = valor_float
