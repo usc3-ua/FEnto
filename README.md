@@ -122,7 +122,7 @@ y condiciones de contorno de Dirichlet en x=L:
 
 con un dominio 0<x<1, 101 nodos y un tamaño uniforme para los elementos.
 
-Si se usase el fichero de configuración que aparece como ejemplo se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
+Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
 <div align="center">
   <img src="imágenes/dirichlet0.jpeg" width="100" />
