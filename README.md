@@ -25,7 +25,7 @@ El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones dife
   <img src="imágenes/ecuacion1d.jpeg" width="270" />
 </div>
 
-utilizando el método de elementos finitos. Para poder utilizarlo se debe crear un archivo de configuración denominado `configuracion.txt` que contenga las especificaciones concretas del problema que se pretenda resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables.
+utilizando el método de elementos finitos. Para poder utilizarlo para resolver un problema específico se debe crear un archivo de configuración denominado `configuracion.txt` que contenga las especificaciones concretas del mismo. Se seguirá la notación `clave = valor` para especificar los valores de las variables.
 
 En primer lugar es necesario definir el límite superior del dominio L, denotado como xmax, que debe ser un número positivo. Además, se especifica el número de nodos (n_nodos) que se van a utilizar para la resolución, que debe ser un valor entero y mayor que dos. Esto se debe a que los elementos que se usan en el programa son elementos lineales y, en consecuencia, si se tienen n_nodos se tendrán (n_nodos-1) elementos (y el menor número de elementos que se puede tener para resolver un problema es uno).
 
