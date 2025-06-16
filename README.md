@@ -98,7 +98,7 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver.jpeg" width="400" />
+  <img src="imágenes/ecaresolver.jpeg" width="430" />
 </div>
 
 con condiciones de contorno de Robin en x=0:
