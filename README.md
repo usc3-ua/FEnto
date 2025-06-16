@@ -11,7 +11,7 @@ Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales 
 Es suficiente con ejecutar en consola lo siguiente:
 
 ```bash
-python3− m venv env
+python3 -m venv env
 source env/bin/activate
 python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
