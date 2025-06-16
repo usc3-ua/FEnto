@@ -98,7 +98,7 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver.jpeg" width="370" />
+  <img src="imágenes/ecaresolver.jpeg" width="400" />
 </div>
 
 con condiciones de contorno de Robin en x=0:
@@ -117,9 +117,18 @@ con un dominio 0<x<1, 101 nodos y un tamaño uniforme para los elementos.
 
 Si se usase el fichero de configuración que aparece como ejemplo se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
+<div align="center">
+  <img src="imágenes/dirichlet0.jpeg" width="100" />
+</div>
+
 y condiciones de contorno de Robin en x=L:
 
+<div align="center">
+  <img src="imágenes/robinL.jpeg" width="150" />
+</div>
+
 Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tamaño personalizado (que se especifica en el archivo).
+
 
 
 
