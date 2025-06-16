@@ -74,7 +74,7 @@ Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguien
   <img src="imágenes/robin1d.jpeg" width="150" />
 </div>
 
-entonces habrá que especificar el tipo de condición en `tipo_condicion_L` y los valores numéricos de γ en `gamma_robin_L` y de *q* en `q_robin_L`:
+entonces habrá que especificar el tipo de condición en `tipo_condicion_L` y los valores numéricos de γ en `gamma_robin_L` y de *q* en `q_robin_L`.
 
 ```
 tipo_condicion_L = robin
