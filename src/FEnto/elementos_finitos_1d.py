@@ -23,6 +23,25 @@ parametros_por_defecto = {
     "q_robin_L": None
 }
 
+safe_env = {
+    "x": 1,
+    "cos": np.cos,
+    "sin": np.sin,
+    "tan": np.tan,
+    "arcsin": np.arcsin,
+    "arccos": np.arccos,
+    "arctan": np.arctan,
+    "sinh": np.sinh,
+    "cosh": np.cosh,
+    "tanh": np.tanh,
+    "exp": np.exp,
+    "log": np.log,
+    "log10": np.log10,
+    "sqrt": np.sqrt,
+    "abs": np.abs,
+    "pi": np.pi
+}
+
 def leer_configuracion(archivo, defecto):
     config_leida = {}
     try:
@@ -97,8 +116,7 @@ def leer_configuracion(archivo, defecto):
 
             elif clave in ["alpha", "beta", "f"]:
                 try:
-                    x = 1
-                    eval(valor, {"x": x, "__builtins__": {}})
+                    compile(valor, "<string>", "eval")
                     config_leida[clave] = valor
                 except Exception as e:
                     raise ValueError(f"La expresión de {clave} no es válida: {e}") from None
@@ -196,13 +214,15 @@ def Dirichlet(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, 
 
     for j in range(0,n_elementos):
         x = ptosmedios_elementos[j]
-        valoresalpha[j] = eval(alpha)
+        safe_env["x"] = x
+        valoresalpha[j] = eval(alpha, {"__builtins__": {}}, safe_env)
 
     valoresbeta = np.zeros(n_elementos)
 
     for k in range(0,n_elementos):
         x = ptosmedios_elementos[k]
-        valoresbeta[k] = eval(beta)
+        safe_env["x"] = x
+        valoresbeta[k] = eval(beta, {"__builtins__": {}}, safe_env)
 
     K[0,0] = valoresalpha[0]/longitudes_elementos[0] + valoresbeta[0]*longitudes_elementos[0]/3
 
@@ -219,15 +239,22 @@ def Dirichlet(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, 
     for n in range(n_nodos):
         if n == 0:
             x = ptosmedios_elementos[0]
-            b[n] = eval(f) * longitudes_elementos[0] / 2
+            safe_env["x"] = x
+            b[n] = eval(f, {"__builtins__": {}}, safe_env) * longitudes_elementos[0] / 2
         elif n == n_nodos - 1:
             x = ptosmedios_elementos[n_elementos-1]
-            b[n] = eval(f) * longitudes_elementos[n_elementos-1] / 2
+            safe_env["x"] = x
+            b[n] = eval(f, {"__builtins__": {}}, safe_env) * longitudes_elementos[n_elementos-1] / 2
         else:
             x1 = ptosmedios_elementos[n]
             x2 = ptosmedios_elementos[n - 1]
-            b1 = eval(f, {"x": x1}) * longitudes_elementos[n] / 2
-            b2 = eval(f, {"x": x2}) * longitudes_elementos[n - 1] / 2
+
+            safe_env["x"] = x1
+            b1 = eval(f, {"__builtins__": {}}, safe_env) * longitudes_elementos[n] / 2
+
+            safe_env["x"] = x2
+            b2 = eval(f, {"__builtins__": {}}, safe_env) * longitudes_elementos[n - 1] / 2
+
             b[n] = b1 + b2
             
 
@@ -265,7 +292,7 @@ for i in range(len(nodos)):
 
 
 plt.figure(figsize=(8,5))
-plt.plot(nodos, phi, marker='o', linestyle='-', color='darkcyan')
+plt.plot(nodos, phi, marker='.', linestyle='-', color='darkcyan')
 plt.title('Solución mediante el método de Elementos Finitos')
 plt.xlabel('x')
 plt.ylabel('ϕ(x)')
