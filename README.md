@@ -51,7 +51,17 @@ longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.
 0.05,0.05
 ```
 
-A continuación, se definen α, β y *f* como valores constantes o funciones de x con lenguaje matemático de python. Se pueden usar las siguientes funciones trigonométricas: coseno, seno, tangente, arcoseno, arcocoseno y arcotangente escribiendo `cos`, `sin`, `tan`, `arcsin`, `arccos` y `arctan`. También el seno, coseno y tangente hiperbólicos con `sinh`, `cosh` y `tanh`. Además, se puede usar la exponencial con `exp`, el logaritmo natural con `log`, el logaritmo en base 10 con `log10`, la raíz con `sqrt`, el valor absoluto con `abs` y el número π con `pi`.
+A continuación, se definen α, β y *f* como valores constantes o funciones de x con lenguaje matemático de python. Se permiten las siguientes funciones:
+
+- Trigonométricas: `cos`, `sin`, `tan`, `arcsin`, `arccos`, `arctan`.
+
+-  Hiperbólicas: `sinh`, `cosh`, `tanh`.
+
+-  Exponenciales y logarítmicas: `exp`, `log` (logaritmo natural), `log10` (logaritmo en base 10).
+
+- Otras funciones:  `sqrt` (raíz), `abs` (valor absoluto).
+
+También se puede usar la constante matematica π con `pi`.
 
 ```
 alpha = x**3+x
