@@ -115,6 +115,11 @@ y condiciones de contorno de Dirichlet en x=L:
 
 con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
 
+Si se usase el fichero de configuración que aparece como ejemplo se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
+
+y condiciones de contorno de Robin en x=L:
+
+Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tamaño personalizado (que se especifica en el archivo).
 
 
 
