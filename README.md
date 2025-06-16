@@ -113,7 +113,7 @@ y condiciones de contorno de Dirichlet en x=L:
   <img src="imágenes/dirichletL.jpeg" width="100" />
 </div>
 
-con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
+con un dominio 0<x<1, 101 nodos y un tamaño uniforme para los elementos.
 
 Si se usase el fichero de configuración que aparece como ejemplo se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
