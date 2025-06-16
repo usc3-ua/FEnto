@@ -6,9 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "FEnto"
 version = "0.0.1"
-authors = [
-    {name = "Uxía Sendón Caamaño", email = "usc3@alu.ua.es"},
-]
+authors = [{name = "Uxía Sendón Caamaño", email = "usc3@alu.ua.es"}]
 description = "Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales y bidimensionales usando el método de elementos finitos."
 readme = "README.md"
 requires-python = ">=3.13.0"
