@@ -12,6 +12,8 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.13.0
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: matplotlib
 Dynamic: license-file
 
 <div align="center">
@@ -33,6 +35,13 @@ python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
 donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env'. Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema.
 
+Una vez instalado, hay que moverse a la carpeta del paquete para poder hacer uso de sus programas:
+
+```bash
+cd env/lib/python3.13/site-packages/FEnto
+```
+
+
 # Programa 1D
 
 El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones diferenciales unidimensionales con la forma siguiente:
@@ -41,7 +50,7 @@ El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones dife
   <img src="imágenes/ecuacion1d.jpeg" width="270" />
 </div>
 
-utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
+utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion.txt` en el mismo directorio que `elementos_finitos_1d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
 
 En primer lugar es necesario definir el límite superior del dominio L, denotado como xmax, que debe ser un número positivo. Además, se especifica el número de nodos (n_nodos) que se van a utilizar para la resolución, que debe ser un valor entero y mayor que dos. Esto se debe a que los elementos que se usan en el programa son lineales y, en consecuencia, si se tienen n_nodos se tendrán (n_nodos-1) elementos (y el menor número de elementos que se puede tener para resolver un problema es uno).
 
@@ -131,7 +140,7 @@ y condiciones de contorno de Dirichlet en x=L:
 
 con un dominio 0<x<1, 101 nodos y un tamaño uniforme para los elementos.
 
-Si se usase el fichero de configuración que aparece como ejemplo se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
+Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
 <div align="center">
   <img src="imágenes/dirichlet0.jpeg" width="100" />

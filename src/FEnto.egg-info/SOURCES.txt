@@ -6,4 +6,5 @@ src/FEnto/elementos_finitos_1d.py
 src/FEnto.egg-info/PKG-INFO
 src/FEnto.egg-info/SOURCES.txt
 src/FEnto.egg-info/dependency_links.txt
+src/FEnto.egg-info/requires.txt
 src/FEnto.egg-info/top_level.txt
