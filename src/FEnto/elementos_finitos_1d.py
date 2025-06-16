@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 parametros_por_defecto = {
-    "xmax": 1,
+    "L": 1,
     "n_nodos":101,
     "tamano_longitudes": "uniforme", 
     "longitudes_elementos": None,
@@ -45,14 +45,14 @@ def leer_configuracion(archivo, defecto):
             valores_validos_tamano_longitudes = {"personalizado", "uniforme"}
             valores_validos_tipo_condicion = {"dirichlet", "robin"}
 
-            if clave == "xmax":
+            if clave == "L":
                 try:
                     valor_float = float(valor)
                     if valor_float <= 0:
                         raise ValueError
                     config_leida[clave] = valor_float
                 except Exception:
-                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, xmax debe ser un número mayor que cero")
+                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, L debe ser un número mayor que cero")
 
             elif clave == "n_nodos":
                 try:
@@ -86,11 +86,11 @@ def leer_configuracion(archivo, defecto):
                         config_leida["n_nodos"] = defecto["n_nodos"]
                     if len(valores) != config_leida["n_nodos"] - 1:
                         raise ValueError(f"Se esperaban {config_leida['n_nodos'] - 1} longitudes, pero se encontraron {len(valores)}.")
-                    if "xmax" not in config_leida:
-                        config_leida["xmax"] = defecto["xmax"]
+                    if "L" not in config_leida:
+                        config_leida["L"] = defecto["L"]
                     suma = sum(valores)
-                    if abs(suma - config_leida["xmax"]) > 1e-8:  
-                        raise ValueError(f"La suma de 'longitudes_elementos' ({suma}) no coincide con xmax ({config_leida['xmax']}).")
+                    if abs(suma - config_leida["L"]) > 1e-8:  
+                        raise ValueError(f"La suma de 'longitudes_elementos' ({suma}) no coincide con L ({config_leida['L']}).")
                     config_leida[clave] = valores
                 except ValueError as e:
                     raise ValueError(f"Error en 'longitudes_elementos': {e}") from None
@@ -170,7 +170,7 @@ def leer_configuracion(archivo, defecto):
     return config
         
 
-def Dirichlet(xmax, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, valor_dirichlet_0, valor_dirichlet_L, gamma_robin_0, q_robin_0, gamma_robin_L, q_robin_L):
+def Dirichlet(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, valor_dirichlet_0, valor_dirichlet_L, gamma_robin_0, q_robin_0, gamma_robin_L, q_robin_L):
     n_elementos = n_nodos - 1 
 
     if tamano_longitudes == "personalizado":
@@ -180,7 +180,7 @@ def Dirichlet(xmax, n_nodos, tamano_longitudes, longitudes_elementos, alpha, bet
             x_coords[i] = x_coords[i-1] + longitudes_elementos[i-1]
 
     else:
-        x_coords = np.linspace(0,xmax,n_nodos)
+        x_coords = np.linspace(0,L,n_nodos)
         longitudes_elementos = np.ones(n_elementos)*(x_coords[1]-x_coords[0])
 
     ptosmedios_elementos = np.zeros(n_elementos)
@@ -255,7 +255,7 @@ def Dirichlet(xmax, n_nodos, tamano_longitudes, longitudes_elementos, alpha, bet
 
 config = leer_configuracion("configuracion1d.txt", parametros_por_defecto)
 
-K, b, nodos = Dirichlet(config["xmax"], config["n_nodos"], config["tamano_longitudes"], config["longitudes_elementos"], config["alpha"], config["beta"], config["f"], config["tipo_condicion_0"], config["tipo_condicion_L"], config["valor_dirichlet_0"], config["valor_dirichlet_L"], config["gamma_robin_0"], config["q_robin_0"], config["gamma_robin_L"], config["q_robin_L"])
+K, b, nodos = Dirichlet(config["L"], config["n_nodos"], config["tamano_longitudes"], config["longitudes_elementos"], config["alpha"], config["beta"], config["f"], config["tipo_condicion_0"], config["tipo_condicion_L"], config["valor_dirichlet_0"], config["valor_dirichlet_L"], config["gamma_robin_0"], config["q_robin_0"], config["gamma_robin_L"], config["q_robin_L"])
 
 phi = np.linalg.solve(K, b)
 

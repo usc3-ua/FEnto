@@ -1,5 +1,5 @@
 
-xmax = 1
+L = 1
 
 n_nodos = 21
 
