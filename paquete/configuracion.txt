@@ -1,0 +1,29 @@
+
+xmax = 1
+
+n_nodos = 21
+
+tamano_longitudes = personalizado
+
+longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.05,0.06,0.04,0.07,0.03,0.08,0.02,0.05,0.05
+
+alpha = x**3+x
+
+beta = 5*x
+
+f = -89*x**3-95*x**5+18*x**2+38*x-9
+
+tipo_condicion_0 = dirichlet
+
+valor_dirichlet_0 = 10
+
+tipo_condicion_L = robin
+
+gamma_robin_L = -1
+
+q_robin_L = 43
+
+
+
+
+ 
