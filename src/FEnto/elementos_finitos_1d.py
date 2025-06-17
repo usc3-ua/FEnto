@@ -42,6 +42,8 @@ safe_env = {
     "pi": np.pi
 }
 
+safe_env_2 = {"pi": np.pi, "e": np.e}
+
 def leer_configuracion(archivo, defecto):
     config_leida = {}
     try:
@@ -66,7 +68,6 @@ def leer_configuracion(archivo, defecto):
 
             if clave == "L":
                 try:
-                    safe_env_2 = {"pi": np.pi, "e": np.e}
                     valor_float = eval(valor, {"__builtins__": None}, safe_env_2)
                     if not isinstance(valor_float, (int, float)):
                         raise ValueError
@@ -74,7 +75,7 @@ def leer_configuracion(archivo, defecto):
                         raise ValueError
                     config_leida[clave] = valor_float
                 except Exception:
-                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, L debe ser un número mayor que cero")
+                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, '{clave}' debe ser un número mayor que cero")
 
             elif clave == "n_nodos":
                 try:
@@ -83,7 +84,7 @@ def leer_configuracion(archivo, defecto):
                         raise ValueError
                     config_leida[clave] = valor_entero
                 except Exception:
-                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, n_nodos debe ser un entero mayor que 2")
+                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, '{clave}' debe ser un entero mayor que 2")
                 
             elif clave == "tamano_longitudes":
                     es_numero = False
@@ -103,7 +104,7 @@ def leer_configuracion(archivo, defecto):
                 try:
                     valores = [float(v.strip()) for v in valor.split(",")]
                     if not all(v > 0 for v in valores):
-                        raise ValueError("Todos los valores en 'longitudes_elementos' deben ser positivos.")
+                        raise ValueError(f"Todos los valores en '{clave}' deben ser positivos.")
                     if "n_nodos" not in config_leida:
                         config_leida["n_nodos"] = defecto["n_nodos"]
                     if len(valores) != config_leida["n_nodos"] - 1:
@@ -112,17 +113,17 @@ def leer_configuracion(archivo, defecto):
                         config_leida["L"] = defecto["L"]
                     suma = sum(valores)
                     if abs(suma - config_leida["L"]) > 1e-8:  
-                        raise ValueError(f"La suma de 'longitudes_elementos' ({suma}) no coincide con L ({config_leida['L']}).")
+                        raise ValueError(f"La suma de '{clave}' ({suma}) no coincide con L ({config_leida['L']}).")
                     config_leida[clave] = valores
                 except ValueError as e:
-                    raise ValueError(f"Error en 'longitudes_elementos': {e}") from None
+                    raise ValueError(f"Error en '{clave}': {e}") from None
 
             elif clave in ["alpha", "beta", "f"]:
                 try:
                     compile(valor, "<string>", "eval")
                     config_leida[clave] = valor
                 except Exception as e:
-                    raise ValueError(f"La expresión de {clave} no es válida: {e}") from None
+                    raise ValueError(f"La expresión de '{clave}' no es válida: {e}") from None
                     
             elif clave in ["tipo_condicion_0","tipo_condicion_L"]:
                 es_numero = False
@@ -140,9 +141,12 @@ def leer_configuracion(archivo, defecto):
 
             elif clave in ["valor_dirichlet_0", "valor_dirichlet_L", "gamma_robin_0", "gamma_robin_L", "q_robin_0", "q_robin_L"]:
                 try:
-                    config_leida[clave] = float(valor)
-                except Exception as e:
-                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, {clave} debe ser un número")
+                    valor_float = eval(valor, {"__builtins__": None}, safe_env_2)
+                    if not isinstance(valor_float, (int, float)):
+                        raise ValueError
+                    config_leida[clave] = valor_float
+                except Exception:
+                    raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, '{clave}' debe ser un número")
                 
             
         fichero.close()
@@ -189,6 +193,7 @@ def leer_configuracion(archivo, defecto):
         config = defecto.copy()
         print(f"⚠️ Archivo '{archivo}' no encontrado. Usando valores por defecto.")
     return config
+
         
 
 def Dirichlet(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, valor_dirichlet_0, valor_dirichlet_L, gamma_robin_0, q_robin_0, gamma_robin_L, q_robin_L):

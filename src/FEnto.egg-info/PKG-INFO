@@ -2,7 +2,7 @@ Metadata-Version: 2.4
 Name: FEnto
 Version: 0.0.1
 Summary: Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales y bidimensionales usando el método de elementos finitos.
-Author-email: Uxia Sendon-Caamano <usc3@alu.ua.es>
+Author-email: Uxía Sendón Caamaño <usc3@alu.ua.es>
 License-Expression: MIT
 Project-URL: Homepage, https://github.com/usc3-ua/FEnto/tree/main
 Project-URL: DOWNLOAD, https://github.com/usc3-ua/FEnto.git
@@ -33,7 +33,11 @@ python3 -m venv env
 source env/bin/activate
 python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
-donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env'. Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema.
+donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env' (en Linux/macOS). Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema. Al terminar, se sale del entorno virtual con el comando:
+
+```bash
+deactivate
+```
 
 Una vez instalado, hay que moverse a la carpeta del paquete para poder hacer uso de sus programas:
 
@@ -52,7 +56,7 @@ El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones dife
 
 utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion1d.txt` en el mismo directorio que `elementos_finitos_1d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
 
-En primer lugar es necesario definir el límite superior del dominio, L, que debe ser un número positivo. Además, se especifica el número de nodos (n_nodos) que se van a utilizar para la resolución, que debe ser un valor entero y mayor que dos. Esto se debe a que los elementos que se usan en el programa son lineales y, en consecuencia, si se tienen n_nodos se tendrán (n_nodos-1) elementos (y el menor número de elementos que se puede tener para resolver un problema es uno).
+En primer lugar es necesario definir el límite superior del dominio, L, que debe ser un número positivo. Pueden usarse las constantes matemáticas π y *e* escribiendo simplemente `pi` o `e` y combinarlas mediante operaciones aritméticas básicas.  Además, se especifica el número de nodos (n_nodos) que se van a utilizar para la resolución, que debe ser un valor entero y mayor que dos. Esto se debe a que los elementos que se usan en el programa son lineales y, en consecuencia, si se tienen n_nodos se tendrán (n_nodos-1) elementos (y el menor número de elementos que se puede tener para resolver un problema es uno).
 
 ```
 L = 1
@@ -69,7 +73,17 @@ longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.
 0.05,0.05
 ```
 
-A continuación, se definen α, β y *f* como funciones de x o valores constantes con lenguaje matemático de python.
+A continuación, se definen α, β y *f* como valores constantes o funciones de x con lenguaje matemático de python. Se permiten las siguientes funciones:
+
+- Trigonométricas: `cos`, `sin`, `tan`, `arcsin`, `arccos`, `arctan`.
+
+-  Hiperbólicas: `sinh`, `cosh`, `tanh`.
+
+-  Exponenciales y logarítmicas: `exp`, `log` (logaritmo natural), `log10` (logaritmo en base 10).
+
+- Otras funciones:  `sqrt` (raíz), `abs` (valor absoluto).
+
+También se puede usar la constante matematica π con `pi`. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_1d.py`.
 
 ```
 alpha = x**3+x
