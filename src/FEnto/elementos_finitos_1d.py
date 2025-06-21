@@ -87,18 +87,18 @@ def leer_configuracion(archivo, defecto):
                     raise ValueError(f"La línea '{linea_original.strip()}' contiene un error, '{clave}' debe ser un entero mayor que 2")
                 
             elif clave == "tamano_longitudes":
-                    es_numero = False
-                    try:
-                        _ = float(valor)
-                        es_numero = True
-                    except ValueError:
-                        pass
-                    if es_numero:
-                        raise ValueError(f"La clave '{clave}' no puede tener un valor numérico: '{valor}'")
-                    valor_minusculas = valor.lower()
-                    if valor_minusculas not in valores_validos_tamano_longitudes:
-                        raise ValueError(f"La clave '{clave}' no puede tener el valor '{valor}'. Debe ser uno de {valores_validos_tamano_longitudes}")
-                    config_leida[clave] = valor_minusculas
+                es_numero = False
+                try:
+                    _ = float(valor)
+                    es_numero = True
+                except ValueError:
+                    pass
+                if es_numero:
+                    raise ValueError(f"La clave '{clave}' no puede tener un valor numérico: '{valor}'")
+                valor_minusculas = valor.lower()
+                if valor_minusculas not in valores_validos_tamano_longitudes:
+                    raise ValueError(f"La clave '{clave}' no puede tener el valor '{valor}'. Debe ser uno de {valores_validos_tamano_longitudes}")
+                config_leida[clave] = valor_minusculas
 
             elif clave == "longitudes_elementos":
                 try:
@@ -196,7 +196,7 @@ def leer_configuracion(archivo, defecto):
 
         
 
-def Dirichlet(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, valor_dirichlet_0, valor_dirichlet_L, gamma_robin_0, q_robin_0, gamma_robin_L, q_robin_L):
+def elementos_finitos(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, valor_dirichlet_0, valor_dirichlet_L, gamma_robin_0, q_robin_0, gamma_robin_L, q_robin_L):
     n_elementos = n_nodos - 1 
 
     if tamano_longitudes == "personalizado":
@@ -290,7 +290,7 @@ def Dirichlet(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, 
 
 config = leer_configuracion("configuracion1d.txt", parametros_por_defecto)
 
-K, b, nodos = Dirichlet(config["L"], config["n_nodos"], config["tamano_longitudes"], config["longitudes_elementos"], config["alpha"], config["beta"], config["f"], config["tipo_condicion_0"], config["tipo_condicion_L"], config["valor_dirichlet_0"], config["valor_dirichlet_L"], config["gamma_robin_0"], config["q_robin_0"], config["gamma_robin_L"], config["q_robin_L"])
+K, b, nodos = elementos_finitos(config["L"], config["n_nodos"], config["tamano_longitudes"], config["longitudes_elementos"], config["alpha"], config["beta"], config["f"], config["tipo_condicion_0"], config["tipo_condicion_L"], config["valor_dirichlet_0"], config["valor_dirichlet_L"], config["gamma_robin_0"], config["q_robin_0"], config["gamma_robin_L"], config["q_robin_L"])
 
 phi = np.linalg.solve(K, b)
 
