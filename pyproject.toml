@@ -16,7 +16,6 @@ classifiers = [
 ]
 dependencies = ["numpy", "matplotlib"]
 license = { text = "MIT" }
-license-files = ["LICEN[CS]E*"]
 keywords = ["elementos finitos", "FEM", "MEF", "ecuaciones diferenciales", "EDs", "EDPs"]
 
 [project.urls]
