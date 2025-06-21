@@ -9,7 +9,7 @@ version = "0.0.1"
 authors = [{name = "Uxía Sendón Caamaño", email = "usc3@alu.ua.es"}]
 description = "Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales y bidimensionales usando el método de elementos finitos."
 readme = "README.md"
-requires-python = ">=3.13.0"
+requires-python = ">=3.7.13"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
