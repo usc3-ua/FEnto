@@ -175,10 +175,16 @@ También se puede usar la constante matematica π con `pi` y el número `e` medi
 
 Notar que la ecuación diferencial a resolver tiene Ω como dominio. Γ es la frontera del mismo, que a su vez está formada por Γ₁ y Γ₂ (Γ=Γ₁+Γ₂). En Γ₁ se aplican condiciones contorno de Dirichlet y en Γ₂ condiciones de contorno de Robin (o de Neumann si se especifica γ=0):
 
+<div align="center">
+  <img src="imágenes/dirichlet2d.jpeg" width="80" />
+</div>
 
-A continuación, se especifica mediante la variable `gamma_1` el trozo de la frontera en el que se quieren aplicar condiciones de contorno de Dirichlet. 
+<div align="center">
+  <img src="imágenes/robin2d.jpeg" width="80" />
+</div>
 
-Notr que pode estar vacio ou cheo polo tanto poden aplicarse solo cc de neumann e cc de dirichlet
+Mediante la variable `gamma_1` se puede especificar el trozo de la frontera en el que se quieren aplicar condiciones de contorno de Dirichlet. Los valores posibles para `gamma_1` son los siguientes: `borde izquierdo + borde derecho + borde superior`, `borde derecho + borde inferior`, `borde izquierdo + borde derecho`, `borde izquierdo + borde superior + borde inferior`, `borde izquierdo + borde superior`, `borde inferior`, `borde izquierdo + borde derecho + borde superior + borde inferior`, `borde derecho`, `borde superior + borde inferior`, `borde izquierdo + borde derecho + borde inferior`, `borde izquierdo`, `borde derecho + borde superior`, `borde superior`, `borde derecho + borde superior + borde inferior`, `borde izquierdo + borde inferior`. Si se escoge `gamma_1 = borde izquierdo + borde derecho + borde superior + borde inferior` se están aplicando condiciones de contorno de Dirichlet en toda la frontera. Puede especficicarse también `gamma_1 = ` y entonces se estarían aplicando condiciones de contorno de Robin en todo el contorno.
+
 
 
 
