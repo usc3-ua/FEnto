@@ -15,13 +15,13 @@ f = -89*x**3-95*x**5+18*x**2+38*x-9
 
 tipo_condicion_0 = dirichlet
 
-valor_dirichlet_0 = 10
+p_0 = 10
 
 tipo_condicion_L = robin
 
-gamma_robin_L = -1
+gamma_L = -1
 
-q_robin_L = 43
+q_L = 43
 
 
 

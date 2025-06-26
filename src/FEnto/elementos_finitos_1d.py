@@ -15,12 +15,12 @@ parametros_por_defecto = {
     "f": "-89*x**3-95*x**5+18*x**2+38*x-9",
     "tipo_condicion_0": "robin",
     "tipo_condicion_L": "dirichlet",
-    "valor_dirichlet_0": None,       
-    "valor_dirichlet_L": 27,       
-    "gamma_robin_0": 1,         
-    "q_robin_0": 10,
-    "gamma_robin_L": None,         
-    "q_robin_L": None
+    "p_0": None,       
+    "p_L": 27,       
+    "gamma_0": 1,         
+    "q_0": 10,
+    "gamma_L": None,         
+    "q_L": None
 }
 
 safe_env = {
@@ -139,7 +139,7 @@ def leer_configuracion(archivo, defecto):
                     raise ValueError(f"La clave '{clave}' no puede tener el valor '{valor}'. Debe ser uno de {valores_validos_tipo_condicion} (Neumann es un caso particular de Robin)")
                 config_leida[clave] = valor_minusculas
 
-            elif clave in ["valor_dirichlet_0", "valor_dirichlet_L", "gamma_robin_0", "gamma_robin_L", "q_robin_0", "q_robin_L"]:
+            elif clave in ["p_0", "p_L", "gamma_0", "gamma_L", "q_0", "q_L"]:
                 try:
                     valor_float = eval(valor, {"__builtins__": None}, safe_env_2)
                     if not isinstance(valor_float, (int, float)):
@@ -160,14 +160,14 @@ def leer_configuracion(archivo, defecto):
         if "tipo_condicion_0" in config_leida:
             tipo = config_leida["tipo_condicion_0"]
             if tipo == "dirichlet":
-                if "valor_dirichlet_0" not in config_leida:
-                    raise ValueError("Se ha especificado 'tipo_condicion_0 = dirichlet', pero falta 'valor_dirichlet_0' en el archivo de configuración.")
+                if "p_0" not in config_leida:
+                    raise ValueError("Se ha especificado 'tipo_condicion_0 = dirichlet', pero falta 'p_0' en el archivo de configuración.")
             elif tipo == "robin":
                 faltantes = []
-                if "gamma_robin_0" not in config_leida:
-                    faltantes.append("gamma_robin_0")
-                if "q_robin_0" not in config_leida:
-                    faltantes.append("q_robin_0")
+                if "gamma_0" not in config_leida:
+                    faltantes.append("gamma_0")
+                if "q_0" not in config_leida:
+                    faltantes.append("q_0")
                 if faltantes:
                     raise ValueError(f"Se ha especificado 'tipo_condicion_0 = robin', pero faltan los siguientes parámetros en el archivo de configuración: {', '.join(faltantes)}")
 
@@ -175,14 +175,14 @@ def leer_configuracion(archivo, defecto):
         if "tipo_condicion_L" in config_leida:
             tipo = config_leida["tipo_condicion_L"]
             if tipo == "dirichlet":
-                if "valor_dirichlet_L" not in config_leida:
-                    raise ValueError("Se ha especificado 'tipo_condicion_L = dirichlet', pero falta 'valor_dirichlet_L' en el archivo de configuración.")
+                if "p_L" not in config_leida:
+                    raise ValueError("Se ha especificado 'tipo_condicion_L = dirichlet', pero falta 'p_L' en el archivo de configuración.")
             elif tipo == "robin":
                 faltantes = []
-                if "gamma_robin_L" not in config_leida:
-                    faltantes.append("gamma_robin_L")
-                if "q_robin_L" not in config_leida:
-                    faltantes.append("q_robin_L")
+                if "gamma_L" not in config_leida:
+                    faltantes.append("gamma_L")
+                if "q_L" not in config_leida:
+                    faltantes.append("q_L")
                 if faltantes:
                     raise ValueError(f"Se ha especificado 'tipo_condicion_L = robin', pero faltan los siguientes parámetros en el archivo de configuración: {', '.join(faltantes)}")
 
@@ -196,7 +196,7 @@ def leer_configuracion(archivo, defecto):
 
         
 
-def elementos_finitos(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, valor_dirichlet_0, valor_dirichlet_L, gamma_robin_0, q_robin_0, gamma_robin_L, q_robin_L):
+def elementos_finitos(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha, beta, f, tipo_condicion_0, tipo_condicion_L, p_0, p_L, gamma_0, q_0, gamma_L, q_L):
     n_elementos = n_nodos - 1 
 
     if tamano_longitudes == "personalizado":
@@ -269,28 +269,28 @@ def elementos_finitos(L, n_nodos, tamano_longitudes, longitudes_elementos, alpha
     if tipo_condicion_0 == "dirichlet":
         K[0,:] = np.zeros(n_nodos) 
         K[0,0] = 1 
-        b[0] = valor_dirichlet_0
+        b[0] = p_0
 
     else:
-        K[0, 0] += gamma_robin_0
-        b[0] += q_robin_0
+        K[0, 0] += gamma_0
+        b[0] += q_0
 
 
     if tipo_condicion_L == "robin":
-        K[n_nodos-1, n_nodos-1] += gamma_robin_L
-        b[n_nodos-1] += q_robin_L
+        K[n_nodos-1, n_nodos-1] += gamma_L
+        b[n_nodos-1] += q_L
 
     else:
         K[n_nodos-1,:] = np.zeros(n_nodos) 
         K[n_nodos-1,n_nodos-1] = 1 
-        b[n_nodos-1] = valor_dirichlet_L
+        b[n_nodos-1] = p_L
 
     
     return K,b,x_coords
 
 config = leer_configuracion("configuracion1d.txt", parametros_por_defecto)
 
-K, b, nodos = elementos_finitos(config["L"], config["n_nodos"], config["tamano_longitudes"], config["longitudes_elementos"], config["alpha"], config["beta"], config["f"], config["tipo_condicion_0"], config["tipo_condicion_L"], config["valor_dirichlet_0"], config["valor_dirichlet_L"], config["gamma_robin_0"], config["q_robin_0"], config["gamma_robin_L"], config["q_robin_L"])
+K, b, nodos = elementos_finitos(config["L"], config["n_nodos"], config["tamano_longitudes"], config["longitudes_elementos"], config["alpha"], config["beta"], config["f"], config["tipo_condicion_0"], config["tipo_condicion_L"], config["p_0"], config["p_L"], config["gamma_0"], config["q_0"], config["gamma_L"], config["q_L"])
 
 phi = np.linalg.solve(K, b)
 
