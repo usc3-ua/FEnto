@@ -187,7 +187,12 @@ Mediante la variable `gamma_1` se puede especificar el trozo de la frontera en e
 
 En caso de escoger `gamma_1 = borde izquierdo + borde derecho + borde superior + borde inferior` será obligatorio especificar otra variable `p`, que contendrá los valores de la función φ en todos los nodos de Γ₁. Estos valores pueden ser números tanto positivos como negativos y deben estar separados por comas. Si se especifica `gamma_1 = ` será obligatorio especificar dos variables: `γ` y `q`. Ambas contienen números tanto positivos como negativos separados por comas y están definidas en cada segmento perteneciente a Γ₂, se suponen constantes en cada uno de ellos. El resultado más preciso se obtendrá al usar condiciones de contorno de Dirichlet en toda la frontera Γ, si se escogen condiciones de Robin en alguna porción de la frontera y la función no es realmente constante en cada segmento se introducirá un error. Para cualquier valor de `gamma_1` distinto de `borde izquierdo + borde derecho + borde superior + borde inferior` o el vacío, será necesario especificar tanto `p` como `γ` y `q`. Los valores numéricos que pueden usarse en `p`, `γ` y `q` incluyen las constantes matemáticas π y *e*, para usarlas se escribe simplemente `pi` o `e` y pueden combinarse mediante operaciones aritméticas básicas.
 
-No es necesario especificar en el fichero `configuracion2d.txt` los valores de todas las variables, pero sí es importante que se pongan en el orden que se ha indicado. Si alguna variable no aparece, se usará el valor por defecto.
+No es necesario especificar en el fichero `configuracion2d.txt` los valores de todas las variables, pero sí es importante que se pongan en el orden que se ha indicado. Si alguna variable no aparece, se usará el valor por defecto. Sin embargo, si aparece el nombre de una variable distinta de `gamma_1` pero no su valor, por ejemplo:
+
+```
+alpha_x =
+```
+se supondrá que ha sido un despiste y dará un error para que el usuario rellene con el valor correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración.
 
 El programa está hecho para leer un fichero de configuración sin comillas simples ni dobles. Sin embargo, si se usasen comillas para definir el nombre o el valor de alguno de los parámetros, el programa seguiría funcionando. Las comillas serían eliminadas automáticamente de todas las líneas "válidas" (líneas que no son comentarios) del archivo `configuracion2d.txt`.
 
