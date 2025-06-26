@@ -173,6 +173,13 @@ En primer lugar, se definen αₓ, αᵧ, β y *f* como valores constantes o fun
 
 También se puede usar la constante matematica π con `pi` y el número `e` mediante la función exponencial. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_2d.py`.
 
+Notar que la ecuación diferencial a resolver tiene Ω como dominio. Γ es la frontera del mismo, que a su vez está formada por Γ₁ y Γ₂ (Γ=Γ₁+Γ₂). En Γ₁ se aplican condiciones contorno de Dirichlet y en Γ₂ condiciones de contorno de Robin (o de Neumann si se especifica γ=0):
+
+
+A continuación, se especifica mediante la variable `gamma_1` el trozo de la frontera en el que se quieren aplicar condiciones de contorno de Dirichlet. 
+
+Notr que pode estar vacio ou cheo polo tanto poden aplicarse solo cc de neumann e cc de dirichlet
+
 
 
 
