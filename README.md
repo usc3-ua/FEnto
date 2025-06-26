@@ -55,7 +55,7 @@ longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.
 0.05,0.05
 ```
 
-A continuación, se definen α, β y *f* como valores constantes o funciones de x con lenguaje matemático de python. Se permiten las siguientes funciones:
+A continuación, se definen α, β y *f* como valores constantes o funciones de *x* con lenguaje matemático de python. Se permiten las siguientes funciones:
 
 - Trigonométricas: `cos`, `sin`, `tan`, `arcsin`, `arccos`, `arctan`.
 
@@ -65,7 +65,7 @@ A continuación, se definen α, β y *f* como valores constantes o funciones de 
 
 - Otras funciones:  `sqrt` (raíz), `abs` (valor absoluto).
 
-También se puede usar la constante matematica π con `pi`. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_1d.py`.
+También se puede usar la constante matematica π con `pi` y el número `e` mediante la función exponencial. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_1d.py`.
 
 ```
 alpha = x**3+x
@@ -160,6 +160,19 @@ El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones dife
 </div>
 
 utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion2d.txt` en el mismo directorio que `elementos_finitos_2d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
+
+En primer lugar, se definen αₓ, αᵧ, β y *f* como valores constantes o funciones de *x* y/o *y* con lenguaje matemático de python. Se permiten las siguientes funciones:
+
+- Trigonométricas: `cos`, `sin`, `tan`, `arcsin`, `arccos`, `arctan`.
+
+-  Hiperbólicas: `sinh`, `cosh`, `tanh`.
+
+-  Exponenciales y logarítmicas: `exp`, `log` (logaritmo natural), `log10` (logaritmo en base 10).
+
+- Otras funciones:  `sqrt` (raíz), `abs` (valor absoluto).
+
+También se puede usar la constante matematica π con `pi` y el número `e` mediante la función exponencial. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_2d.py`.
+
 
 
 
