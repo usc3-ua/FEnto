@@ -156,7 +156,7 @@ Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tama
 El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales unidimensionales con la forma siguiente:
 
 <div align="center">
-  <img src="imágenes/ecuacion1d.jpeg" width="270" />
+  <img src="imágenes/ecuacion2d.jpeg" width="270" />
 </div>
 
 utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion2d.txt` en el mismo directorio que `elementos_finitos_2d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
