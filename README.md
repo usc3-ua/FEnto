@@ -81,12 +81,12 @@ El último paso de la creación del archivo `configuracion1d.txt` es aplicar con
   <img src="imágenes/dirichlet1d.jpeg" width="80" />
 </div>
 
-Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor numérico específico de *p* que se quiere en `valor_dirichlet_0`.
+Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor numérico específico de *p* que se quiere en `p_0`.
 
 ```
 tipo_condicion_0 = dirichlet
 
-valor_dirichlet_0 = 10
+p_0 = 10
 ```
 
 Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguiente:
@@ -95,24 +95,24 @@ Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguien
   <img src="imágenes/robin1d.jpeg" width="150" />
 </div>
 
-entonces habrá que especificar el tipo de condición en `tipo_condicion_L` y los valores numéricos de γ en `gamma_robin_L` y de *q* en `q_robin_L`.
+entonces habrá que especificar el tipo de condición en `tipo_condicion_L` y los valores numéricos de γ en `gamma_L` y de *q* en `q_L`.
 
 ```
 tipo_condicion_L = robin
 
-gamma_robin_L = -1
+gamma_L = -1
 
-q_robin_L = 43
+q_L = 43
 ```
 
-Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especificarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con escoger condiciones de Robin con γ=0. Los valores numéricos para las variables `valor_dirichlet_0`, `valor_dirichlet_L`, `gamma_robin_0`, `q_robin_0`, `gamma_robin_L` y `q_robin_L` incluyen las constantes matemáticas π y *e*, para usarlas se escribe simplemente `pi` o `e` y pueden combinarse mediante operaciones aritméticas básicas.
+Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especificarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con escoger condiciones de Robin con γ=0. Los valores numéricos para las variables `p_0`, `p_L`, `gamma_0`, `q_0`, `gamma_L` y `q_L` incluyen las constantes matemáticas π y *e*, para usarlas se escribe simplemente `pi` o `e` y pueden combinarse mediante operaciones aritméticas básicas.
 
 No es necesario especificar en el fichero `configuracion1d.txt` los valores de todas las variables, pero sí es importante que se pongan en el orden que se ha indicado. Si alguna variable no aparece, se usará el valor por defecto. Sin embargo, si aparece el nombre de una variable pero no su valor, por ejemplo:
 
 ```
 L =
 ```
-se supondrá que ha sido un despiste y dará un error para que el usuario rellene con el valor correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración. Parece importante recalcar que a pesar de que no hay variables obligatorias en un principio, sí que hay variables que deben ponerse por pares o tríos. Si se escoge `tamano_longitudes = personalizado` debe aparecer también `longitudes_elementos`, y lo mismo pasa con `tipo_condicion_0 = dirichlet` (o `tipo_condicion_L = dirichlet`) y `valor_dirichlet_0` (o `valor_dirichlet_L`). Si se escogen condiciones de Robin en alguno de los dos extremos del dominio `tipo_condicion_0 = robin` (o `tipo_condicion_L = robin`) tendrán que aparecer también las variables `gamma_robin_0` y `q_robin_0` (o `gamma_robin_L` y `q_robin_L`). 
+se supondrá que ha sido un despiste y dará un error para que el usuario rellene con el valor correspondiente. En caso de que se quiera usar el valor por defecto de la misma simplemente habrá que eliminar su nombre del fichero de configuración. Parece importante recalcar que a pesar de que no hay variables obligatorias en un principio, sí que hay variables que deben ponerse por pares o tríos. Si se escoge `tamano_longitudes = personalizado` debe aparecer también `longitudes_elementos`, y lo mismo pasa con `tipo_condicion_0 = dirichlet` (o `tipo_condicion_L = dirichlet`) y `p_0` (o `p_L`). Si se escogen condiciones de Robin en alguno de los dos extremos del dominio `tipo_condicion_0 = robin` (o `tipo_condicion_L = robin`) tendrán que aparecer también las variables `gamma_0` y `q_0` (o `gamma_L` y `q_L`). 
 
 El programa está hecho para leer un fichero de configuración sin comillas simples ni dobles. Sin embargo, si se usasen comillas para definir el nombre o el valor de alguno de los parámetros, el programa seguiría funcionando. Las comillas serían eliminadas automáticamente de todas las líneas "válidas" (líneas que no son comentarios) del archivo `configuracion1d.txt`.
 
