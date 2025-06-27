@@ -233,7 +233,7 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver2d.jpeg" width="430" />
+  <img src="imágenes/ecaresolver2d.jpeg" width="500" />
 </div>
 
 con condiciones de contorno de Dirichlet en toda la frontera Γ.
