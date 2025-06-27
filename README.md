@@ -232,7 +232,13 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
-Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno 
+<div align="center">
+  <img src="imágenes/ecaresolver.jpeg" width="430" />
+</div>
+
+con condiciones de contorno de Dirichlet en toda la frontera Γ.
+
+Si se usase el fichero de configuración `configuracion2d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Robin en el borde inferior (Γ₁) y condiciones de contorno de Dirichlet en los demás (Γ₂).
 
 
 
