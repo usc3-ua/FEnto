@@ -230,6 +230,10 @@ se supondrá que ha sido un despiste y dará un error para que el usuario rellen
 
 El programa está hecho para leer un fichero de configuración sin comillas simples ni dobles. Sin embargo, si se usasen comillas para definir el nombre o el valor de alguno de los parámetros, el programa seguiría funcionando. Las comillas serían eliminadas automáticamente de todas las líneas "válidas" (líneas que no son comentarios) del archivo `configuracion2d.txt`.
 
+En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
+
+Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno 
+
 
 
 
