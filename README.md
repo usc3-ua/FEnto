@@ -10,20 +10,20 @@ Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales 
 
 Es suficiente con ejecutar en consola lo siguiente:
 
-```bash
+```
 python3 -m venv env
 source env/bin/activate
 python -m pip install git+https://github.com/usc3-ua/FEnto.git
 ```
 donde los dos primeros comandos crean y activan un entorno virtual de nombre 'env' (en Linux/macOS). Este paso no es estrictamente necesario pero sí recomendable, pues permite aislar las dependencias del proyecto y evitar conflictos con otras instalaciones del sistema. Al terminar, se sale del entorno virtual con el comando:
 
-```bash
+```
 deactivate
 ```
 
 Una vez instalado, hay que moverse a la carpeta del paquete para poder hacer uso de sus programas:
 
-```bash
+```
 cd env/lib/python3.13/site-packages/FEnto
 ```
 
@@ -173,7 +173,7 @@ En primer lugar, se definen αₓ, αᵧ, β y *f* como valores constantes o fun
 
 También se puede usar la constante matematica π con `pi` y el número `e` mediante la función exponencial. Si se necesitase alguna función o constante adicional de numpy podría añadirse fácilmente en el diccionario `safe_env` del programa `elementos_finitos_2d.py`.
 
-```bash
+```
 alpha_x =  1+x
 
 alpha_y = exp(y)
@@ -198,7 +198,7 @@ Mediante la variable `gamma_1` se puede especificar el trozo de la frontera en e
 
 En caso de escoger `gamma_1 = borde izquierdo + borde derecho + borde superior + borde inferior` será obligatorio especificar otra variable `p`, que contendrá los valores de la función φ en todos los nodos de Γ₁. Estos valores pueden ser números tanto positivos como negativos y deben estar separados por comas. Si se especifica `gamma_1 = ` será obligatorio especificar dos variables: `γ` y `q`. Ambas contienen números tanto positivos como negativos separados por comas y están definidas en cada segmento perteneciente a Γ₂, se suponen constantes en cada uno de ellos. Para cualquier valor de `gamma_1` distinto de `borde izquierdo + borde derecho + borde superior + borde inferior` o el vacío, será necesario especificar tanto `p` como `γ` y `q`. Los valores numéricos que pueden usarse en `p`, `γ` y `q` incluyen las constantes matemáticas π y *e*, para usarlas se escribe simplemente `pi` o `e` y pueden combinarse mediante operaciones aritméticas básicas.
 
-```bash
+```
 gamma_1 = borde izquierdo + borde derecho + borde superior
 
 p = 0.0, 1.0, 0.009999833334166666, 1.0099998333341667, 0.019998666693333084, 1.0199986666933332, 0.02999550020249566, 1.0299955002024956, 0.03998933418663417, 1.0399893341866342, 0.04997916927067833, 1.0499791692706784, 0.059964006479444595, 1.0599640064794447, 0.06994284733753275, 1.0699428473375328, 0.07991469396917271, 1.0799146939691726, 0.08987854919801105, 1.089878549198011, 0.09983341664682815, 0.09983341664682815, 0.19983341664682816, 0.29983341664682817, 0.39983341664682814, 0.4998334166468282, 0.5998334166468282, 0.6998334166468281, 0.7998334166468282, 0.8998334166468283, 0.9998334166468281, 1.0998334166468282, 1.0998334166468282
