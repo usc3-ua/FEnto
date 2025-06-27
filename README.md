@@ -180,7 +180,8 @@ alpha_y = exp(y)
 
 beta = cos(y)
 
-f = -1.0-0.1*exp(y)*cos(0.1*y)+0.01*exp(y)*sin(0.1*y)+cos(y)*(x+sin(0.1*y))
+f = -1.0-0.1*exp(y)*cos(0.1*y)+0.01*exp(y)*sin(0.1*y)+
+cos(y)*(x+sin(0.1*y))
 ```
 
 Notar que la ecuación diferencial a resolver tiene Ω como dominio. Γ es la frontera del mismo, que a su vez está formada por Γ₁ y Γ₂ (Γ=Γ₁+Γ₂). En Γ₁ se aplican condiciones contorno de Dirichlet y en Γ₂ condiciones de contorno de Robin (o de Neumann si se escoge γ=0):
@@ -205,7 +206,7 @@ p = 0.0, 1.0, 0.009999833334166666, 1.0099998333341667, 0.019998666693333084, 1.
 gamma = 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0
 
 q = -0.05, 0.05000000000000002, 0.15, 0.24999999999999997, 0.35, 0.45000000000000007, 0.5499999999999999, 0.65, 0.7500000000000001, 0.85
-``
+```
 
 
 No es necesario especificar en el fichero `configuracion2d.txt` los valores de todas las variables, pero sí es importante que se pongan en el orden que se ha indicado. Si alguna variable no aparece, se usará el valor por defecto. Sin embargo, si aparece el nombre de una variable distinta de `gamma_1` pero no su valor, por ejemplo:
