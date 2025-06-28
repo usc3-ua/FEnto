@@ -153,7 +153,7 @@ Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tama
 
 # Programa 2D
 
-El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales unidimensionales con la forma siguiente:
+El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales bidimensionales con la forma siguiente:
 
 <div align="center">
   <img src="imágenes/ecuacion2d.jpeg" width="290" />
