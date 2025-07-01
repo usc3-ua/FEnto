@@ -73,10 +73,10 @@ def identificacion_malla(elementos):
         ):
             segmentos_agujero.append(segmento)
 
-    longitud_agujero = len(segmentos_agujero)
-
     nodos_agujero = list(set([nodo for segmento in segmentos_agujero for nodo in segmento]))
 
+    longitud_agujero = len(nodos_agujero)
+    
     return segmentos_bordes, Lx_min, Ly_min, Lx_max, Ly_max, longitud_agujero, nodos_agujero
 
     
@@ -225,7 +225,7 @@ def leer_configuracion(archivo,defecto):
 
 
 def aplicacion_condiciones(x,y,gamma_1):
-    nodos_gamma = []
+    nodos_frontera = []
     
     segmentos_bordes, Lx_min, Ly_min, Lx_max, Ly_max, longitud_agujero, nodos_agujero = identificacion_malla(EL)
 
@@ -234,7 +234,9 @@ def aplicacion_condiciones(x,y,gamma_1):
             np.isclose(x[i], Lx_max) or
             np.isclose(y[i], Ly_min) or
             np.isclose(y[i], Ly_max)):
-            nodos_gamma.append(i)
+            nodos_frontera.append(i)
+
+    nodos_frontera.extend(nodos_agujero)
 
     nd = []
 
@@ -317,7 +319,7 @@ def aplicacion_condiciones(x,y,gamma_1):
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
     elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior":
-        nd = nodos_gamma
+        nd = nodos_frontera
     elif gamma_1 == "bordederecho+bordeinferior":
         for i in range(N):
             if np.isclose(x[i], Lx_max):
@@ -325,6 +327,26 @@ def aplicacion_condiciones(x,y,gamma_1):
             if np.isclose(y[i], Ly_min):
                 nd.append(i)
     elif gamma_1 == "interior":
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordederecho+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordesuperior+interior":
+        for i in range(N):
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
         nd.extend(nodos_agujero)
     elif gamma_1 == "bordesuperior+bordeinferior+interior":
         for i in range(N):
@@ -398,7 +420,7 @@ def aplicacion_condiciones(x,y,gamma_1):
                 nd.append(i)
         nd.extend(nodos_agujero)
     elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior+interior":
-        nd = nodos_gamma
+        nd = nodos_frontera
         nd.extend(nodos_agujero)
     elif gamma_1 == "bordederecho+bordeinferior+interior":
         for i in range(N):
@@ -414,7 +436,7 @@ def aplicacion_condiciones(x,y,gamma_1):
 
     Nd = len(nd) 
 
-    gamma_2 = list(set(nodos_gamma) - set(nd)) 
+    gamma_2 = list(set(nodos_frontera) - set(nd)) 
 
     segmentos_gamma_2 = [segmento for segmento in segmentos_bordes if not (segmento[0] in nd and segmento[1] in nd)]
 
