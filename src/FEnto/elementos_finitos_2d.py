@@ -9,8 +9,6 @@ NL = np.loadtxt('nodos.txt', delimiter = ',', skiprows = 1)
 
 EL = np.loadtxt('elementos.txt', delimiter = ',', skiprows = 1, dtype = int)
 
-EL = EL -1
-
 N = np.shape(NL)[0]
 
 x = np.zeros(N)
@@ -27,8 +25,8 @@ parametros_por_defecto = {
     "alpha_y": "exp(y)",
     "beta": "cos(y)",
     "f": "-1.0-0.1*exp(y)*cos(0.1*y)+0.01*exp(y)*sin(0.1*y)+cos(y)*(x+sin(0.1*y))",
-    "gamma_1": "borde izquierdo + borde derecho + borde superior + borde inferior",
-    "p": [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0.009999833334166666,\
+    "gamma_1": "bordeizquierdo+bordederecho+bordesuperior+bordeinferior",
+    "p": [0.0, 0.1, 0.2, 0.3, 0.4,0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0.009999833334166666,\
           1.0099998333341667, 0.019998666693333084, 1.0199986666933332, 0.02999550020249566,\
           1.0299955002024956, 0.03998933418663417, 1.0399893341866342, 0.04997916927067833,\
           1.0499791692706784, 0.059964006479444595, 1.0599640064794447, 0.06994284733753275,\
@@ -42,6 +40,48 @@ parametros_por_defecto = {
 
 
 safe_env_2 = {"pi": np.pi, "e": np.e}
+
+def identificacion_malla(elementos):
+    from collections import Counter
+
+    def segmentos_elementos(elementos):
+        segmentos = []
+
+        for tri in elementos:
+            segmentos.append(tuple(sorted((tri[0], tri[1]))))
+            segmentos.append(tuple(sorted((tri[1], tri[2]))))
+            segmentos.append(tuple(sorted((tri[2], tri[0]))))
+        return segmentos
+
+    segmentos = segmentos_elementos(EL)
+
+    segmentos_cuenta = Counter(segmentos)
+
+    segmentos_bordes = [segmento for segmento, cuenta in segmentos_cuenta.items() if cuenta == 1]
+   
+    Lx_min = np.min(x)
+    Ly_min = np.min(y)
+    Lx_max = np.max(x)
+    Ly_max = np.max(y)
+
+    segmentos_agujero = []
+    for segmento in segmentos_bordes:
+        n1, n2 = segmento
+        if not (
+            np.isclose(x[n1], Lx_min) or np.isclose(x[n1], Lx_max) or np.isclose(y[n1], Ly_min) or np.isclose(y[n1], Ly_max) or
+            np.isclose(x[n2], Lx_min) or np.isclose(x[n2], Lx_max) or np.isclose(y[n2], Ly_min) or np.isclose(y[n2], Ly_max)
+        ):
+            segmentos_agujero.append(segmento)
+
+    longitud_agujero = len(segmentos_agujero)
+
+    nodos_agujero = list(set([nodo for segmento in segmentos_agujero for nodo in segmento]))
+
+    return segmentos_bordes, Lx_min, Ly_min, Lx_max, Ly_max, longitud_agujero, nodos_agujero
+
+    
+
+
 
 def leer_configuracion(archivo,defecto):
     config_leida = {}
@@ -64,12 +104,17 @@ def leer_configuracion(archivo,defecto):
 
             import itertools
 
-            bordes = ["borde izquierdo", "borde derecho", "borde superior", "borde inferior"]
+            _, _, _, _, _, longitud_agujero, _ = identificacion_malla(EL)
+
+            bordes = ["bordeizquierdo", "bordederecho", "bordesuperior", "bordeinferior"]
+
+            if longitud_agujero > 1:
+                bordes.append("interior")
+                
             valores_validos_gamma_1 = set()
 
-            for k in range(0, 5):
+            for k in range(0, len(bordes) + 1):
                 for comb in itertools.combinations(bordes, k):
-                    valores_validos_gamma_1.add(" + ".join(comb))
                     valores_validos_gamma_1.add("+".join(comb))
 
             if clave in ["alpha_x", "alpha_y", "beta", "f"]:
@@ -89,9 +134,11 @@ def leer_configuracion(archivo,defecto):
                 if es_numero:
                     raise ValueError(f"La clave '{clave}' no puede tener un valor numérico: '{valor}'")
                 valor_minusculas = valor.lower()
-                if valor_minusculas not in valores_validos_gamma_1:
+                valor_sin_espacios = valor_minusculas.replace(" ", "")
+
+                if valor_sin_espacios not in valores_validos_gamma_1:
                     raise ValueError(f"La clave '{clave}' no puede tener el valor '{valor}'. Debe ser uno de {valores_validos_gamma_1}")
-                config_leida[clave] = valor_minusculas
+                config_leida[clave] = valor_sin_espacios
 
             elif clave == "p":
                 try:
@@ -100,7 +147,7 @@ def leer_configuracion(archivo,defecto):
                     if "gamma_1" not in config_leida:
                         config_leida["gamma_1"] = defecto["gamma_1"]
 
-                    Nd, _, _, _, _ = frontera_gamma(x,y, config_leida["gamma_1"])
+                    Nd, _, _, _, _ =  aplicacion_condiciones(x,y, config_leida["gamma_1"])
                     
                     if len(valores) != Nd:
                         raise ValueError(f"La clave '{clave}' no tiene la longitud adecuada tiene {len(valores)} elementos en lugar de {Nd}")
@@ -117,7 +164,7 @@ def leer_configuracion(archivo,defecto):
                     if "gamma_1" not in config_leida:
                         config_leida["gamma_1"] = defecto["gamma_1"]
 
-                    _, _, _, Ms, _ = frontera_gamma(x,y, config_leida["gamma_1"])
+                    _, _, _, Ms, _ = aplicacion_condiciones(x,y, config_leida["gamma_1"])
                     
                     if len(valores) != Ms:
                         raise ValueError(f"La clave '{clave}' no tiene la longitud adecuada tiene {len(valores)} elementos en lugar de {Ms}")
@@ -127,31 +174,43 @@ def leer_configuracion(archivo,defecto):
                     raise ValueError(f"Error en '{clave}': {e}") from None
 
         fichero.close()
-
+        
         if "gamma_1" in config_leida:
             gamma_1_valor = config_leida.get("gamma_1", "")
 
-            if gamma_1_valor in ['borde izquierdo + borde superior + borde inferior', 'borde derecho + borde superior + borde inferior',\
-                                 'borde izquierdo', 'borde superior + borde inferior', 'borde derecho + borde inferior',\
-                                 'borde izquierdo + borde derecho','borde inferior', 'borde derecho + borde superior', 'borde derecho',\
-                                 'borde izquierdo + borde superior', 'borde izquierdo + borde derecho + borde superior',\
-                                 'borde izquierdo + borde derecho + borde inferior', 'borde superior', 'borde izquierdo + borde inferior', \
-                                 'borde izquierdo+borde superior+borde inferior', 'borde derecho+borde superior+borde inferior',\
-                                 'borde superior+borde inferior', 'borde derecho+borde inferior','borde izquierdo+borde derecho',\
-                                 'borde derecho+borde superior', 'borde izquierdo+borde superior', 'borde izquierdo+borde derecho+borde superior',\
-                                 'borde izquierdo+borde derecho+borde inferior', 'borde izquierdo+borde inferior']:
-                faltantes = [k for k in ("p", "gamma", "q") if k not in config_leida]
-                if faltantes:
-                    raise ValueError(
-                        f"Cuando 'gamma_1' es '{gamma_1_valor}', los siguientes parámetros deben estar definidos: {faltantes}")
-            elif gamma_1_valor in ["borde izquierdo + borde derecho + borde superior + borde inferior", "borde izquierdo+borde derecho+borde superior+borde inferior"]:
-                if "p" not in config_leida:
-                    raise ValueError("Cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior', el parámetro 'p' debe estar definido.")
+            if longitud_agujero == 0:
+                if gamma_1_valor == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior":
+                    if "p" not in config_leida:
+                        raise ValueError("Cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior', el parámetro 'p' debe estar definido.")
+                if gamma_1_valor == "":
+                    faltantes = [k for k in ("gamma", "q") if k not in config_leida]
+                    if faltantes:
+                        raise ValueError(f"Cuando 'gamma_1' está vacía los siguientes parámetros deben estar definidos: {faltantes}")
+                else:
+                    faltantes = [k for k in ("p", "gamma", "q") if k not in config_leida]
+                    if faltantes:
+                        raise ValueError(
+                            f"Cuando 'gamma_1' es '{gamma_1_valor}', los siguientes parámetros deben estar definidos: {faltantes}")
             else:
-                faltantes = [k for k in ("gamma", "q") if k not in config_leida]
-                if faltantes:
-                    raise ValueError(f"Cuando 'gamma_1' está vacía los siguientes parámetros deben estar definidos: {faltantes}")
+                if gamma_1_valor == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior+interior":
+                    if "p" not in config_leida:
+                        raise ValueError("Cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior + interior', el parámetro 'p' debe estar definido.")
+                if gamma_1_valor == "":
+                    faltantes = [k for k in ("gamma", "q") if k not in config_leida]
+                    if faltantes:
+                        raise ValueError(f"Cuando 'gamma_1' está vacía los siguientes parámetros deben estar definidos: {faltantes}")
+                else:
+                    faltantes = [k for k in ("p", "gamma", "q") if k not in config_leida]
+                    if faltantes:
+                        raise ValueError(
+                            f"Cuando 'gamma_1' es '{gamma_1_valor}', los siguientes parámetros deben estar definidos: {faltantes}")
+
                 
+
+
+        config = defecto.copy()
+        config.update(config_leida)
+    except FileNotFoundError:
 
 
         config = defecto.copy()
@@ -165,12 +224,10 @@ def leer_configuracion(archivo,defecto):
 
 
 
-def frontera_gamma(x,y,gamma_1):
+def aplicacion_condiciones(x,y,gamma_1):
     nodos_gamma = []
-    Lx_min = np.min(x)
-    Ly_min = np.min(y)
-    Lx_max = np.max(x)
-    Ly_max = np.max(y)
+    
+    segmentos_bordes, Lx_min, Ly_min, Lx_max, Ly_max, longitud_agujero, nodos_agujero = identificacion_malla(EL)
 
     for i in range(N):
         if (np.isclose(x[i], Lx_min) or
@@ -180,71 +237,72 @@ def frontera_gamma(x,y,gamma_1):
             nodos_gamma.append(i)
 
     nd = []
-    if gamma_1 == "borde izquierdo":
+
+    if gamma_1 == "bordeizquierdo":
         for i in range(N):
             if np.isclose(x[i], Lx_min):
                 nd.append(i)
-    elif gamma_1 == "borde derecho":
+    elif gamma_1 == "bordederecho":
         for i in range(N):
             if np.isclose(x[i], Lx_max):
                 nd.append(i)
-    elif gamma_1 == "borde inferior":
+    elif gamma_1 == "bordeinferior":
         for i in range(N):
             if np.isclose(y[i], Ly_min):
                 nd.append(i)
-    elif gamma_1 == "borde superior":
+    elif gamma_1 == "bordesuperior":
         for i in range(N):
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
-    elif gamma_1 in ["borde superior + borde inferior", "borde superior+borde inferior"]:
+    elif gamma_1 == "bordesuperior+borde inferior":
         for i in range(N):
-            if np.isclose(y[i], Ly_max):
-                nd.append(i)
-            if np.isclose(y[i], Ly_min):
-                nd.append(i)
-    elif gamma_1 in ["borde izquierdo + borde derecho", "borde izquierdo+borde derecho"]:
-        for i in range(N):
-            if np.isclose(x[i], Lx_min):
-                nd.append(i)
-            if np.isclose(x[i], Lx_max):
-                nd.append(i)
-    elif gamma_1 in ["borde izquierdo + borde derecho + borde superior", "borde izquierdo+borde derecho+borde superior"]:
-        for i in range(N):
-            if np.isclose(x[i], Lx_min):
-                nd.append(i)
-            if np.isclose(x[i], Lx_max):
-                nd.append(i)
-            if np.isclose(y[i], Ly_max):
-                nd.append(i)
-    elif gamma_1 in ["borde izquierdo + borde superior + borde inferior", "borde izquierdo+borde superior+borde inferior"]:
-        for i in range(N):
-            if np.isclose(x[i], Lx_min):
-                nd.append(i)
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
             if np.isclose(y[i], Ly_min):
                 nd.append(i)
-    elif gamma_1 in ["borde derecho + borde superior + borde inferior", "borde derecho+borde superior+borde inferior"]:
+    elif gamma_1 == "bordeizquierdo+bordederecho":
         for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
             if np.isclose(x[i], Lx_max):
+                nd.append(i)
+    elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+    elif gamma_1 == "bordeizquierdo+bordesuperior+bordeinferior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
                 nd.append(i)
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
             if np.isclose(y[i], Ly_min):
                 nd.append(i)
-    elif gamma_1 in ["borde izquierdo + borde superior", "borde izquierdo+borde superior"]:
+    elif gamma_1 == "bordederecho+bordesuperior+bordeinferior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+    elif gamma_1 == "bordeizquierdo+bordesuperior":
         for i in range(N):
             if np.isclose(x[i], Lx_min):
                 nd.append(i)
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
-    elif gamma_1 in ["borde izquierdo + borde inferior", "borde izquierdo+borde inferior"]:
+    elif gamma_1 == "bordeizquierdo+bordeinferior":
         for i in range(N):
             if np.isclose(x[i], Lx_min):
                 nd.append(i)
             if np.isclose(y[i], Ly_min):
                 nd.append(i)
-    elif gamma_1 == "borde izquierdo + borde derecho + borde inferior":
+    elif gamma_1 == "bordeizquierdo+bordederecho+bordeinferior":
         for i in range(N):
             if np.isclose(x[i], Lx_min):
                 nd.append(i)
@@ -252,44 +310,111 @@ def frontera_gamma(x,y,gamma_1):
                 nd.append(i)
             if np.isclose(x[i], Lx_min):
                 nd.append(i)
-    elif gamma_1 in ["borde derecho + borde superior", "borde derecho+borde superior"]:
+    elif gamma_1 == "bordederecho+bordesuperior":
         for i in range(N):
             if np.isclose(x[i], Lx_max):
                 nd.append(i)
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
-    elif gamma_1 in ["borde izquierdo + borde derecho + borde superior + borde inferior", "borde izquierdo+borde derecho+borde superior+borde inferior"]:
+    elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior":
         nd = nodos_gamma
-    elif gamma_1 in ["borde derecho + borde inferior", "borde derecho+borde inferior"]:
+    elif gamma_1 == "bordederecho+bordeinferior":
         for i in range(N):
             if np.isclose(x[i], Lx_max):
                 nd.append(i)
             if np.isclose(y[i], Ly_min):
                 nd.append(i)
+    elif gamma_1 == "interior":
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordesuperior+bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+bordederecho+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+bordesuperior+bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordederecho+bordesuperior+bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 ==  "bordeizquierdo+bordesuperior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+bordederecho+bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordederecho+bordesuperior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior+interior":
+        nd = nodos_gamma
+        nd.extend(nodos_agujero)
+    elif gamma_1 == "bordederecho+bordeinferior+interior":
+        for i in range(N):
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
+        nd.extend(nodos_agujero)
     else:
         nd = []
+
+
 
     Nd = len(nd) 
 
     gamma_2 = list(set(nodos_gamma) - set(nd)) 
-
-    from collections import Counter
-
-    def segmentos_elementos(elementos):
-        segmentos = []
-
-        for tri in elementos:
-            segmentos.append(tuple(sorted((tri[0], tri[1]))))
-            segmentos.append(tuple(sorted((tri[1], tri[2]))))
-            segmentos.append(tuple(sorted((tri[2], tri[0]))))
-        return segmentos
-
-
-    segmentos = segmentos_elementos(EL)
-
-    segmentos_cuenta = Counter(segmentos)
-
-    segmentos_bordes = [segmento for segmento, cuenta in segmentos_cuenta.items() if cuenta == 1]
 
     segmentos_gamma_2 = [segmento for segmento in segmentos_bordes if not (segmento[0] in nd and segmento[1] in nd)]
 
@@ -388,7 +513,7 @@ def elementos_finitos(alpha_x, alpha_y, beta, f, p, gamma, q):
             b[int(n[k,e])] = b[int(n[k,e])] + b_el[k]
 
 
-    Nd, nd, gamma_2, Ms, segmentos_gamma_2 = frontera_gamma(x,y,config["gamma_1"])
+    Nd, nd, gamma_2, Ms, segmentos_gamma_2 = aplicacion_condiciones(x,y,config["gamma_1"])
 
     l = np.zeros(Ms)
 
