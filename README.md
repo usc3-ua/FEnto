@@ -153,6 +153,12 @@ Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tama
 
 # Programa 2D
 
+Para dos dimensiones existen dos programas: `malla.py` y `elementos_finitos_2d.py`.
+
+El programa de nombre `malla.py` permite generar un archivo `nodos.txt`, que contiene las coordenadas de todos los nodos del dominio; y otro `elementos.txt` que contiene los índices globales de los nodos pertenecientes a cada uno de los elementos triangulares lineales en los que se discretiza el dominio. El dominio es un rectángulo que recorre de 0 a xmax en *x* y de 0 a ymax en *y*. Se puede crear fichero de configuración denominado `especificaciones_malla.txt` para personalizar la malla que se va a generar. Se seguirá la notación `clave = valor` para especificar los valores de las variables. En primer lugar, se puede definir `tipo`, que puede ser `uniforme` o `con agujero`. Representaciones de los dos tipos posibles de malla pueden verse en la imagen siguiente:
+
+A continuación, se pueden definir los límites superiores del dominio, tanto en el eje *x* como en el eje *y*, denotados por `xmax` e `ymax`. El siguiente paso es definir `xr`, que representa el número de piezas en la dirección horizontal si se escoge `tipo = uniforme` y el número de piezas tanto en la dirección horizontal como en la vertical si se escoge `tipo = con agujero`. Después, se puede establecer el valor de `yd`, que representará el número de piezas en la dirección vertical si se escoge `tipo = uniforme` y el número de piezas en cada mitad de la diagonal si se escoge `tipo = con agujero`. El último parámetro que se puede definir es `R`, que representa el radio del agujero en caso de escoger `tipo = con agujero`. Ninguna de las variables es obligatoria. Si no aparece alguna se cogerá su valor por defecto. Si no existiese siquiera archivo de configuración se establecerían todos los parámetros con sus valores por defecto. Al igual que en el caso 1D, si en el fichero de configuración aparece el nombre de una variable pero no su valor, el programa dará un error que obligará a rellenarlo o a eliminar su nombre para que se coja automáticamente su valor por defecto. Si se usasen comillas para definir el nombre o el valor de alguno de los parámetros, el programa seguiría funcionando. Las comillas serían eliminadas automáticamente de todas las líneas "válidas" (líneas que no son comentarios) del archivo `especificaciones_malla.txt`.
+
 El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales bidimensionales con la forma siguiente:
 
 <div align="center">
