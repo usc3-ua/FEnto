@@ -171,7 +171,7 @@ El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones dife
   <img src="imágenes/ecuacion2d.jpeg" width="290" />
 </div>
 
-utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion2d.txt` en el mismo directorio que `elementos_finitos_2d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
+utilizando el método de elementos finitos. Para ejecutarlo es necesario que en su mismo directorio existan los archivos `nodos.txt` y `elementos.txt` creados con `malla.py`. Además, si quiere usarse en un caso específico, se debe añadir también un archivo de configuración denominado `configuracion2d.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
 
 En primer lugar, se definen αₓ, αᵧ, β y *f* como valores constantes o funciones de *x* y/o *y* con lenguaje matemático de python. Se permiten las siguientes funciones:
 
