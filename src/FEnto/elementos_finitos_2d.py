@@ -108,7 +108,7 @@ def leer_configuracion(archivo,defecto):
 
             bordes = ["bordeizquierdo", "bordederecho", "bordesuperior", "bordeinferior"]
 
-            if longitud_agujero > 1:
+            if longitud_agujero > 0:
                 bordes.append("interior")
                 
             valores_validos_gamma_1 = set()
@@ -181,7 +181,7 @@ def leer_configuracion(archivo,defecto):
             if longitud_agujero == 0:
                 if gamma_1_valor == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior":
                     if "p" not in config_leida:
-                        raise ValueError("Cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior', el parámetro 'p' debe estar definido.")
+                        raise ValueError("Usando una malla uniforme, cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior', el parámetro 'p' debe estar definido.")
                 if gamma_1_valor == "":
                     faltantes = [k for k in ("gamma", "q") if k not in config_leida]
                     if faltantes:
@@ -194,7 +194,7 @@ def leer_configuracion(archivo,defecto):
             else:
                 if gamma_1_valor == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior+interior":
                     if "p" not in config_leida:
-                        raise ValueError("Cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior + interior', el parámetro 'p' debe estar definido.")
+                        raise ValueError("Usando una malla con agujero, cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior + interior', el parámetro 'p' debe estar definido.")
                 if gamma_1_valor == "":
                     faltantes = [k for k in ("gamma", "q") if k not in config_leida]
                     if faltantes:
@@ -210,11 +210,7 @@ def leer_configuracion(archivo,defecto):
 
         config = defecto.copy()
         config.update(config_leida)
-    except FileNotFoundError:
 
-
-        config = defecto.copy()
-        config.update(config_leida)
     except FileNotFoundError:
         config = defecto.copy()
         print(f"⚠️ Archivo '{archivo}' no encontrado. Usando valores por defecto.")
@@ -310,7 +306,7 @@ def aplicacion_condiciones(x,y,gamma_1):
                 nd.append(i)
             if np.isclose(x[i], Lx_max):
                 nd.append(i)
-            if np.isclose(x[i], Lx_min):
+            if np.isclose(y[i], Ly_min):
                 nd.append(i)
     elif gamma_1 == "bordederecho+bordesuperior":
         for i in range(N):
@@ -319,7 +315,15 @@ def aplicacion_condiciones(x,y,gamma_1):
             if np.isclose(y[i], Ly_max):
                 nd.append(i)
     elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior":
-        nd = nodos_frontera
+        for i in range(N):
+            if np.isclose(x[i], Lx_max):
+                nd.append(i)
+            if np.isclose(y[i], Ly_max):
+                nd.append(i)
+            if np.isclose(x[i], Lx_min):
+                nd.append(i)
+            if np.isclose(y[i], Ly_min):
+                nd.append(i)
     elif gamma_1 == "bordederecho+bordeinferior":
         for i in range(N):
             if np.isclose(x[i], Lx_max):
@@ -409,7 +413,7 @@ def aplicacion_condiciones(x,y,gamma_1):
                 nd.append(i)
             if np.isclose(x[i], Lx_max):
                 nd.append(i)
-            if np.isclose(x[i], Lx_min):
+            if np.isclose(y[i], Ly_min):
                 nd.append(i)
         nd.extend(nodos_agujero)
     elif gamma_1 == "bordederecho+bordesuperior+interior":
@@ -421,7 +425,6 @@ def aplicacion_condiciones(x,y,gamma_1):
         nd.extend(nodos_agujero)
     elif gamma_1 == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior+interior":
         nd = nodos_frontera
-        nd.extend(nodos_agujero)
     elif gamma_1 == "bordederecho+bordeinferior+interior":
         for i in range(N):
             if np.isclose(x[i], Lx_max):

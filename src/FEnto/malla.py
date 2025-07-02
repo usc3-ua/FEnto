@@ -80,7 +80,7 @@ def leer_configuracion(archivo,defecto):
                     if "ymax" not in config_leida:
                         config_leida["ymax"] = defecto["ymax"]
                     
-                    if valor_float > min(config_leida["xmax"] / 2, config_leida["ymax"] / 2):
+                    if valor_float >= min(config_leida["xmax"] / 2, config_leida["ymax"] / 2):
                         raise ValueError
 
                     config_leida["R"] = valor_float 
