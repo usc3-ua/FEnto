@@ -241,8 +241,8 @@ def crear_malla(xmax,ymax,xr,yd,R,tipo):
 
 
 
-        NoE_tri = 2 * n_elementos
-        EL_tri = np.zeros([NoE_tri, 3], dtype=int)
+        n_elementos_tri = 2 * n_elementos
+        EL_tri = np.zeros([n_elementos_tri, 3], dtype=int)
         for i in range(n_elementos):
             EL_tri[2 * i, :] = [int(EL_cuad[i, 0]), int(EL_cuad[i, 1]), int(EL_cuad[i, 2])]
             EL_tri[2 * i + 1, :] = [int(EL_cuad[i, 0]), int(EL_cuad[i, 2]), int(EL_cuad[i, 3])]
