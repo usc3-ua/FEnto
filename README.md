@@ -168,7 +168,7 @@ Ninguna de las variables es obligatoria, pero deben estar escritas en el orden e
 El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales bidimensionales con la forma siguiente:
 
 <div align="center">
-  <img src="imágenes/ecuacion2d.jpeg" width="330" />
+  <img src="imágenes/ecuacion2d.jpeg" width="350" />
 </div>
 
 utilizando el método de elementos finitos. Para ejecutarlo es necesario que en su mismo directorio existan los archivos `nodos.txt` y `elementos.txt` creados con `malla.py`. Además, si quiere usarse en un caso específico, se debe añadir también un archivo de configuración denominado `configuracion2d.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
@@ -199,7 +199,7 @@ cos(y)*(x+sin(0.1*y))
 Notar que la ecuación diferencial a resolver tiene Ω como dominio. Γ es la frontera del mismo, que a su vez está formada por Γ₁ y Γ₂ (Γ=Γ₁+Γ₂). En Γ₁ se aplican condiciones contorno de Dirichlet y en Γ₂ condiciones de contorno de Robin (o de Neumann si se escoge γ=0):
 
 <div align="center">
-  <img src="imágenes/dirichlet2d.jpeg" width="130" />
+  <img src="imágenes/dirichlet2d.jpeg" width="120" />
 </div>
 
 <div align="center">
@@ -245,7 +245,7 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver2d.jpeg" width="670" />
+  <img src="imágenes/ecaresolver2d.jpeg" width="680" />
 </div>
 
 con condiciones de contorno de Dirichlet en toda la frontera Γ.
