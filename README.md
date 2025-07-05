@@ -46,7 +46,7 @@ L = 1
 n_nodos = 21
 ```
 
-Una vez hecho esto, hay que indicar si se quiere que el tamaño de los elementos sea `uniforme` o `personalizado` y para ello se usa la variable `tamano_longitudes`. Si se escoge `uniforme` el programa va a dividir el dominio de forma que se generen elementos de igual tamaño. Si se escoge `personalizado` será obligatorio definir otra variable de nombre `longitudes_elementos` en la cual se especificarán las longitudes de cada uno de los elementos como números positivos separados por comas. No será necesario especificar `longitudes_elementos` en el caso de escoger `tamano_longitudes = uniforme`. Para el caso personalizado se podría tener lo siguiente:
+Una vez hecho esto, se puede indicar si se quiere que el tamaño de los elementos sea `uniforme` o `personalizado` y para ello se usa la variable `tamano_longitudes`. Si se escoge `uniforme` el programa va a dividir el dominio de forma que se generen elementos de igual tamaño. Si se escoge `personalizado` será obligatorio definir otra variable de nombre `longitudes_elementos` en la cual se especificarán las longitudes de cada uno de los elementos como números positivos separados por comas. No será necesario especificar `longitudes_elementos` en el caso de escoger `tamano_longitudes = uniforme`. Para el caso personalizado se podría tener lo siguiente:
 
 ```
 tamano_longitudes = personalizado
@@ -55,7 +55,7 @@ longitudes_elementos = 0.05,0.05,0.06,0.04,0.03,0.07,0.05,0.05,0.02,0.08,0.05,0.
 0.05,0.05
 ```
 
-A continuación, se definen α, β y *f* como valores constantes o funciones de *x* con lenguaje matemático de python. Se permiten las siguientes funciones:
+A continuación, se pueden definir α, β y *f* como valores constantes o funciones de *x* con lenguaje matemático de python. Se permiten las siguientes funciones:
 
 - Trigonométricas: `cos`, `sin`, `tan`, `arcsin`, `arccos`, `arctan`.
 
