@@ -158,7 +158,7 @@ Para dos dimensiones existen dos programas: `malla.py` y `elementos_finitos_2d.p
 El programa de nombre `malla.py` permite generar un archivo `nodos.txt`, que contiene las coordenadas de todos los nodos del dominio; y otro `elementos.txt`, que contiene los índices globales de los nodos pertenecientes a cada uno de los elementos triangulares lineales en los que se discretiza el dominio. El dominio es un rectángulo que recorre de 0 a xmax en *x* y de 0 a ymax en *y*. Se puede crear fichero de configuración denominado `especificaciones_malla.txt` para personalizar la malla que se va a generar. Se seguirá la notación `clave = valor` para especificar los valores de las variables. En primer lugar, se puede definir `tipo`, que puede ser `uniforme` o `con agujero`. Representaciones de los dos tipos posibles de malla pueden verse en la imagen siguiente:
 
 <div align="center">
-  <img src="imágenes/mallas.jpeg" width="400" />
+  <img src="imágenes/mallas.jpeg" width="450" />
 </div>
 
 A continuación, se pueden definir los límites superiores del dominio, tanto en el eje *x* como en el eje *y*, denotados por `xmax` e `ymax`. El siguiente paso es definir `xr`, que representa el número de piezas en la dirección horizontal si se escoge `tipo = uniforme` y el número de piezas tanto en la dirección horizontal como en la vertical si se escoge `tipo = con agujero`. Después, se puede establecer el valor de `yd`, que representará el número de piezas en la dirección vertical si se escoge `tipo = uniforme` y el número de piezas en cada mitad de la diagonal si se escoge `tipo = con agujero` (ver figura anterior). El último parámetro que se puede definir es `R`, que representa el radio del agujero en caso de escoger `tipo = con agujero`. 
@@ -168,7 +168,7 @@ Ninguna de las variables es obligatoria, pero deben estar escritas en el orden e
 El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales bidimensionales con la forma siguiente:
 
 <div align="center">
-  <img src="imágenes/ecuacion2d.jpeg" width="290" />
+  <img src="imágenes/ecuacion2d.jpeg" width="310" />
 </div>
 
 utilizando el método de elementos finitos. Para ejecutarlo es necesario que en su mismo directorio existan los archivos `nodos.txt` y `elementos.txt` creados con `malla.py`. Además, si quiere usarse en un caso específico, se debe añadir también un archivo de configuración denominado `configuracion2d.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
@@ -199,11 +199,11 @@ cos(y)*(x+sin(0.1*y))
 Notar que la ecuación diferencial a resolver tiene Ω como dominio. Γ es la frontera del mismo, que a su vez está formada por Γ₁ y Γ₂ (Γ=Γ₁+Γ₂). En Γ₁ se aplican condiciones contorno de Dirichlet y en Γ₂ condiciones de contorno de Robin (o de Neumann si se escoge γ=0):
 
 <div align="center">
-  <img src="imágenes/dirichlet2d.jpeg" width="120" />
+  <img src="imágenes/dirichlet2d.jpeg" width="140" />
 </div>
 
 <div align="center">
-  <img src="imágenes/robin2d.jpeg" width="300" />
+  <img src="imágenes/robin2d.jpeg" width="320" />
 </div>
 
 Mediante la variable `gamma_1` se puede especificar el trozo de la frontera en el que se quieren aplicar condiciones de contorno de Dirichlet. Los valores posibles para `gamma_1` son los siguientes: `borde izquierdo + borde derecho + borde superior`, `borde derecho + borde inferior`, `borde izquierdo + borde derecho`, `borde izquierdo + borde superior + borde inferior`, `borde izquierdo + borde superior`, `borde inferior`, `borde izquierdo + borde derecho + borde superior + borde inferior`, `borde derecho`, `borde superior + borde inferior`, `borde izquierdo + borde derecho + borde inferior`, `borde izquierdo`, `borde derecho + borde superior`, `borde superior`, `borde derecho + borde superior + borde inferior`, `borde izquierdo + borde inferior`. Si se escoge `gamma_1 = borde izquierdo + borde derecho + borde superior + borde inferior` se están aplicando condiciones de contorno de Dirichlet en toda la frontera. Puede dejarse el valor vacío, `gamma_1 = `, y entonces se estarían aplicando condiciones de contorno de Robin en todo el contorno. Los bordes de los valores compuestos de `gamma_1` tienen que escribirse en el orden en el que se ha especificado para que funcionen bien, por ejemplo, habría que usar `borde izquierdo + borde derecho` y `borde derecho + borde izquierdo` no funcionaría. Sin embargo, pueden escribirse con los espacios distribuidos como se quiera, siempre funcionará. Se permiten `borde izquierdo + borde derecho`, `borde izquierdo+borde derecho`, `borde izquierdo +borde derecho` o incluso `bordeizquierdo+bordederecho`, entre otros.
@@ -245,7 +245,7 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver2d.jpeg" width="600" />
+  <img src="imágenes/ecaresolver2d.jpeg" width="650" />
 </div>
 
 con condiciones de contorno de Dirichlet en toda la frontera Γ.
