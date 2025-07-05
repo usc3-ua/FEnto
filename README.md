@@ -168,7 +168,7 @@ Ninguna de las variables es obligatoria, pero deben estar escritas en el orden e
 El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones diferenciales bidimensionales con la forma siguiente:
 
 <div align="center">
-  <img src="imágenes/ecuacion2d.jpeg" width="310" />
+  <img src="imágenes/ecuacion2d.jpeg" width="330" />
 </div>
 
 utilizando el método de elementos finitos. Para ejecutarlo es necesario que en su mismo directorio existan los archivos `nodos.txt` y `elementos.txt` creados con `malla.py`. Además, si quiere usarse en un caso específico, se debe añadir también un archivo de configuración denominado `configuracion2d.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
@@ -199,11 +199,11 @@ cos(y)*(x+sin(0.1*y))
 Notar que la ecuación diferencial a resolver tiene Ω como dominio. Γ es la frontera del mismo, que a su vez está formada por Γ₁ y Γ₂ (Γ=Γ₁+Γ₂). En Γ₁ se aplican condiciones contorno de Dirichlet y en Γ₂ condiciones de contorno de Robin (o de Neumann si se escoge γ=0):
 
 <div align="center">
-  <img src="imágenes/dirichlet2d.jpeg" width="140" />
+  <img src="imágenes/dirichlet2d.jpeg" width="130" />
 </div>
 
 <div align="center">
-  <img src="imágenes/robin2d.jpeg" width="320" />
+  <img src="imágenes/robin2d.jpeg" width="330" />
 </div>
 
 Mediante la variable `gamma_1` se puede especificar el trozo de la frontera en el que se quieren aplicar condiciones de contorno de Dirichlet. Los valores posibles para `gamma_1` son los siguientes: `borde izquierdo + borde derecho + borde superior`, `borde derecho + borde inferior`, `borde izquierdo + borde derecho`, `borde izquierdo + borde superior + borde inferior`, `borde izquierdo + borde superior`, `borde inferior`, `borde izquierdo + borde derecho + borde superior + borde inferior`, `borde derecho`, `borde superior + borde inferior`, `borde izquierdo + borde derecho + borde inferior`, `borde izquierdo`, `borde derecho + borde superior`, `borde superior`, `borde derecho + borde superior + borde inferior`, `borde izquierdo + borde inferior`. Si se escoge `gamma_1 = borde izquierdo + borde derecho + borde superior + borde inferior` se están aplicando condiciones de contorno de Dirichlet en toda la frontera. Puede dejarse el valor vacío, `gamma_1 = `, y entonces se estarían aplicando condiciones de contorno de Robin en todo el contorno. Los bordes de los valores compuestos de `gamma_1` tienen que escribirse en el orden en el que se ha especificado para que funcionen bien, por ejemplo, habría que usar `borde izquierdo + borde derecho` y `borde derecho + borde izquierdo` no funcionaría. Sin embargo, pueden escribirse con los espacios distribuidos como se quiera, siempre funcionará. Se permiten `borde izquierdo + borde derecho`, `borde izquierdo+borde derecho`, `borde izquierdo +borde derecho` o incluso `bordeizquierdo+bordederecho`, entre otros.
@@ -245,7 +245,7 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver2d.jpeg" width="650" />
+  <img src="imágenes/ecaresolver2d.jpeg" width="670" />
 </div>
 
 con condiciones de contorno de Dirichlet en toda la frontera Γ.
