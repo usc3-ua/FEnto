@@ -78,7 +78,7 @@ f = -89*x**3-95*x**5+18*x**2+38*x-9
 El último paso de la creación del archivo `configuracion1d.txt` es aplicar condiciones de contorno, que pueden ser tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
 
 <div align="center">
-  <img src="imágenes/dirichlet1d.jpeg" width="80" />
+  <img src="imágenes/dirichlet1d.jpeg" width="100" />
 </div>
 
 Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor numérico específico de *p* que se quiere en `p_0`.
@@ -92,7 +92,7 @@ p_0 = 10
 Si se quieren usar condiciones de contorno de Robin en *x=L* se tiene lo siguiente:
 
 <div align="center">
-  <img src="imágenes/robin1d.jpeg" width="150" />
+  <img src="imágenes/robin1d.jpeg" width="170" />
 </div>
 
 entonces habrá que especificar el tipo de condición en `tipo_condicion_L` y los valores numéricos de γ en `gamma_L` y de *q* en `q_L`.
