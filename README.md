@@ -139,13 +139,13 @@ con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
 Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
 <div align="center">
-  <img src="imágenes/dirichlet0.jpeg" width="150" />
+  <img src="imágenes/dirichlet0.jpeg" width="130" />
 </div>
 
 y condiciones de contorno de Robin en x=L:
 
 <div align="center">
-  <img src="imágenes/robinL.jpeg" width="210" />
+  <img src="imágenes/robinL.jpeg" width="200" />
 </div>
 
 Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tamaño personalizado (que se especifica en el archivo).
