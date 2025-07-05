@@ -33,7 +33,7 @@ cd env/lib/python3.13/site-packages/FEnto
 El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones diferenciales unidimensionales con la forma siguiente:
 
 <div align="center">
-  <img src="imágenes/ecuacion1d.jpeg" width="280" />
+  <img src="imágenes/ecuacion1d.jpeg" width="300" />
 </div>
 
 utilizando el método de elementos finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion1d.txt` en el mismo directorio que `elementos_finitos_1d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para establecer los valores de las variables en el archivo.
@@ -119,33 +119,33 @@ El programa está hecho para leer un fichero de configuración sin comillas simp
 En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
-  <img src="imágenes/ecaresolver.jpeg" width="490" />
+  <img src="imágenes/ecaresolver.jpeg" width="590" />
 </div>
 
 con condiciones de contorno de Robin en x=0:
 
 <div align="center">
-  <img src="imágenes/robin0.jpeg" width="170" />
+  <img src="imágenes/robin0.jpeg" width="200" />
 </div>
 
 y condiciones de contorno de Dirichlet en x=L:
 
 <div align="center">
-  <img src="imágenes/dirichletL.jpeg" width="100" />
+  <img src="imágenes/dirichletL.jpeg" width="120" />
 </div>
 
-con un dominio 0<x<1, 101 nodos y un tamaño uniforme para los elementos.
+con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
 
 Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
 <div align="center">
-  <img src="imágenes/dirichlet0.jpeg" width="100" />
+  <img src="imágenes/dirichlet0.jpeg" width="120" />
 </div>
 
 y condiciones de contorno de Robin en x=L:
 
 <div align="center">
-  <img src="imágenes/robinL.jpeg" width="150" />
+  <img src="imágenes/robinL.jpeg" width="200" />
 </div>
 
 Además, el número de nodos pasaría a ser 21 y los elementos tendrían un tamaño personalizado (que se especifica en el archivo).
