@@ -294,11 +294,6 @@ K, b, nodos = elementos_finitos(config["L"], config["n_nodos"], config["tamano_l
 
 phi = np.linalg.solve(K, b)
 
-print("Solución MEF en los nodos:")
-for i in range(len(nodos)):
-    print(f"ϕ({nodos[i]:.2f}) = {phi[i]:.4f}")
-
-
 plt.figure(figsize=(8,5))
 plt.plot(nodos, phi, marker='.', linestyle='-', color='darkcyan')
 plt.title('Solución mediante el método de Elementos Finitos')
