@@ -78,7 +78,7 @@ f = -89*x**3-95*x**5+18*x**2+38*x-9
 El último paso de la creación del archivo `configuracion1d.txt` es aplicar condiciones de contorno, que pueden ser tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
 
 <div align="center">
-  <img src="imágenes/dirichlet1d.jpeg" width="100" />
+  <img src="imágenes/dirichlet1d.jpeg" width="90" />
 </div>
 
 Entonces en el fichero de configuración habrá que especificar el tipo de condición que se usa en `tipo_condicion_0` y obligatoriamente el valor numérico específico de *p* que se quiere en `p_0`.
@@ -131,7 +131,7 @@ con condiciones de contorno de Robin en x=0:
 y condiciones de contorno de Dirichlet en x=L:
 
 <div align="center">
-  <img src="imágenes/dirichletL.jpeg" width="130" />
+  <img src="imágenes/dirichletL.jpeg" width="120" />
 </div>
 
 con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
@@ -139,7 +139,7 @@ con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
 Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
 
 <div align="center">
-  <img src="imágenes/dirichlet0.jpeg" width="130" />
+  <img src="imágenes/dirichlet0.jpeg" width="120" />
 </div>
 
 y condiciones de contorno de Robin en x=L:
