@@ -75,7 +75,7 @@ beta = 5*x
 f = -89*x**3-95*x**5+18*x**2+38*x-9
 ```
 
-El último paso de la creación del archivo `configuracion1d.txt` es aplicar condiciones de contorno, que pueden ser tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en x = 0 se tiene:
+El último paso de la creación del archivo `configuracion1d.txt` es aplicar condiciones de contorno, que pueden ser tanto de Dirichlet como de Robin o de Neumann en ambos extremos del dominio. Por ejemplo, si se escoge condición de contorno de Dirichlet en *x=0* se tiene:
 
 <div align="center">
   <img src="imágenes/dirichlet1d.jpeg" width="90" />
@@ -105,7 +105,7 @@ gamma_L = -1
 q_L = 43
 ```
 
-Obviamente, podrían aplicarse también condiciones de Robin en x=0 y condiciones de Dirichlet en x=L, únicamente habría que especificarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con escoger condiciones de Robin con γ=0. Los valores numéricos para las variables `p_0`, `p_L`, `gamma_0`, `q_0`, `gamma_L` y `q_L` incluyen las constantes matemáticas π y *e*, para usarlas se escribe simplemente `pi` o `e` y pueden combinarse mediante operaciones aritméticas básicas.
+Obviamente, podrían aplicarse también condiciones de Robin en *x=0* y condiciones de Dirichlet en *x=L*, únicamente habría que especificarlo de la misma forma que se ha mostrado pero intercambiando 0 por L y viceversa en el nombre de las variables. Para poder aplicar condiciones de Neumann basta con escoger condiciones de Robin con γ=0. Los valores numéricos para las variables `p_0`, `p_L`, `gamma_0`, `q_0`, `gamma_L` y `q_L` incluyen las constantes matemáticas π y *e*, para usarlas se escribe simplemente `pi` o `e` y pueden combinarse mediante operaciones aritméticas básicas.
 
 No es necesario especificar en el fichero `configuracion1d.txt` los valores de todas las variables, pero sí es importante que se pongan en el orden que se ha indicado. Si alguna variable no aparece, se usará el valor por defecto. Sin embargo, si aparece el nombre de una variable pero no su valor, por ejemplo:
 
@@ -122,13 +122,13 @@ En el caso de que no existiese un fichero de configuración, se usarían todos l
   <img src="imágenes/ecaresolver.jpeg" width="590" />
 </div>
 
-con condiciones de contorno de Robin en x=0:
+con condiciones de contorno de Robin en *x=0*:
 
 <div align="center">
   <img src="imágenes/robin0.jpeg" width="210" />
 </div>
 
-y condiciones de contorno de Dirichlet en x=L:
+y condiciones de contorno de Dirichlet en *x=L*:
 
 <div align="center">
   <img src="imágenes/dirichletL.jpeg" width="120" />
@@ -136,13 +136,13 @@ y condiciones de contorno de Dirichlet en x=L:
 
 con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
 
-Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en x=0:
+Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en *x=0*:
 
 <div align="center">
   <img src="imágenes/dirichlet0.jpeg" width="120" />
 </div>
 
-y condiciones de contorno de Robin en x=L:
+y condiciones de contorno de Robin en *x=L*:
 
 <div align="center">
   <img src="imágenes/robinL.jpeg" width="200" />
