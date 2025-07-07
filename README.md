@@ -242,7 +242,7 @@ se supondrá que ha sido un despiste y dará un error para que el usuario rellen
 
 El programa está hecho para leer un fichero de configuración sin comillas simples ni dobles. Sin embargo, si se usasen comillas para definir el nombre o el valor de alguno de los parámetros, el programa seguiría funcionando. Las comillas serían eliminadas automáticamente de todas las líneas "válidas" (líneas que no son comentarios) del archivo `configuracion2d.txt`.
 
-En el caso de que no existiese un fichero de configuración, se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
+Suponiendo que se guardan en el mismo directorio que `elementos_finitos_2d.py` los archivos `nodos.txt` y `elementos.txt` que aparecen en la carpeta de tests, si no existiese un fichero de configuración se usarían todos los parámetros por defecto y se resolvería el problema siguiente:
 
 <div align="center">
   <img src="imágenes/ecaresolver2d.jpeg" width="680" />
