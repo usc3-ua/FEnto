@@ -183,7 +183,7 @@ def leer_configuracion(archivo,defecto):
                 if gamma_1_valor == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior":
                     if "p" not in config_leida:
                         raise ValueError("Usando una malla uniforme, cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior', el parámetro 'p' debe estar definido.")
-                if gamma_1_valor == "":
+                elif gamma_1_valor == "":
                     faltantes = [k for k in ("gamma", "q") if k not in config_leida]
                     if faltantes:
                         raise ValueError(f"Cuando 'gamma_1' está vacía los siguientes parámetros deben estar definidos: {faltantes}")
@@ -196,7 +196,7 @@ def leer_configuracion(archivo,defecto):
                 if gamma_1_valor == "bordeizquierdo+bordederecho+bordesuperior+bordeinferior+interior":
                     if "p" not in config_leida:
                         raise ValueError("Usando una malla con agujero, cuando 'gamma_1' es 'borde izquierdo + borde derecho + borde superior + borde inferior + interior', el parámetro 'p' debe estar definido.")
-                if gamma_1_valor == "":
+                elif gamma_1_valor == "":
                     faltantes = [k for k in ("gamma", "q") if k not in config_leida]
                     if faltantes:
                         raise ValueError(f"Cuando 'gamma_1' está vacía los siguientes parámetros deben estar definidos: {faltantes}")
