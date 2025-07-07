@@ -4,7 +4,7 @@
 
 <br>
 
-Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales y bidimensionales usando el Método de Elementos Finitos.
+Paquete que permite resolver ecuaciones en derivadas parciales unidimensionales y bidimensionales usando el Método de los Elementos Finitos.
 
 # Instalación
 
@@ -36,7 +36,7 @@ El programa de nombre `elementos_finitos_1d.py` permite resolver ecuaciones dife
   <img src="imágenes/ecuacion1d.jpeg" width="300" />
 </div>
 
-utilizando el Método de Elementos Finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion1d.txt` en el mismo directorio que `elementos_finitos_1d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para establecer los valores de las variables en el archivo.
+utilizando el Método de los Elementos Finitos. Para poder utilizarlo en un caso específico se debe crear un archivo de configuración denominado `configuracion1d.txt` en el mismo directorio que `elementos_finitos_1d.py` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para establecer los valores de las variables en el archivo.
 
 En primer lugar se puede definir el límite superior del dominio, L, que debe ser un número positivo. Pueden usarse las constantes matemáticas π y *e* escribiendo simplemente `pi` o `e` y combinarlas mediante operaciones aritméticas básicas.  Después, es posible especificar el número de nodos (n_nodos) que se van a utilizar para la resolución, que debe ser un valor entero y mayor o igual que dos. Esto se debe a que los elementos que se usan en el programa son lineales y, en consecuencia, si se tienen n_nodos se tendrán (n_nodos-1) elementos (y el menor número de elementos que se puede tener para resolver un problema es uno).
 
@@ -171,7 +171,7 @@ El programa de nombre `elementos_finitos_2d.py` permite resolver ecuaciones dife
   <img src="imágenes/ecuacion2d.jpeg" width="350" />
 </div>
 
-utilizando el Método de Elementos Finitos. Para ejecutarlo es necesario que en su mismo directorio existan los archivos `nodos.txt` y `elementos.txt` creados con `malla.py`. Además, si quiere usarse en un caso específico, se debe añadir también un archivo de configuración denominado `configuracion2d.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
+utilizando el Método de los Elementos Finitos. Para ejecutarlo es necesario que en su mismo directorio existan los archivos `nodos.txt` y `elementos.txt` creados con `malla.py`. Además, si quiere usarse en un caso específico, se debe añadir también un archivo de configuración denominado `configuracion2d.txt` que contenga las especificaciones concretas del problema que se quiera resolver. Se seguirá la notación `clave = valor` para especificar los valores de las variables en el archivo.
 
 En primer lugar, se pueden definir en `configuracion2d.txt` αₓ, αᵧ, β y *f* como valores constantes o funciones de *x* y/o *y* con lenguaje matemático de Python. Se permiten las siguientes funciones:
 
