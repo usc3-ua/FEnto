@@ -131,7 +131,7 @@ con condiciones de contorno de Robin en *x=0*:
 y condiciones de contorno de Dirichlet en *x=L*:
 
 <div align="center">
-  <img src="imágenes/dirichletL.jpeg" width="120" />
+  <img src="imágenes/dirichletL.jpeg" width="110" />
 </div>
 
 con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
@@ -139,7 +139,7 @@ con un dominio *0<x<1*, 101 nodos y un tamaño uniforme para los elementos.
 Si se usase el fichero de configuración `configuracion1d.txt` que aparece como ejemplo en la carpeta `tests` se resolvería la misma ecuación diferencial pero ahora con condiciones de contorno de Dirichlet en *x=0*:
 
 <div align="center">
-  <img src="imágenes/dirichlet0.jpeg" width="120" />
+  <img src="imágenes/dirichlet0.jpeg" width="100" />
 </div>
 
 y condiciones de contorno de Robin en *x=L*:
